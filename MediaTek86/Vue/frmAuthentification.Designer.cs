@@ -1,7 +1,7 @@
 ﻿
 namespace MediaTek86.Vue
 {
-    partial class frmAuthentifications
+    partial class frmAuthentification
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace MediaTek86.Vue
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAuthentifications));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAuthentification));
             this.lblIdentifiant = new System.Windows.Forms.Label();
             this.txtIdentifiant = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
