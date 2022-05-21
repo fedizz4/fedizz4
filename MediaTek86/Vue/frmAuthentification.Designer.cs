@@ -88,6 +88,7 @@ namespace MediaTek86.Vue
             this.chkPassword.TabIndex = 3;
             this.chkPassword.Text = "Afficher le mot de passe";
             this.chkPassword.UseVisualStyleBackColor = false;
+            this.chkPassword.CheckedChanged += new System.EventHandler(this.chkPassword_CheckedChanged);
             // 
             // btnConnexion
             // 
@@ -100,6 +101,7 @@ namespace MediaTek86.Vue
             this.btnConnexion.TabIndex = 4;
             this.btnConnexion.Text = "Connexion";
             this.btnConnexion.UseVisualStyleBackColor = false;
+            this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
             // 
             // lblMediaTek
             // 
@@ -114,7 +116,7 @@ namespace MediaTek86.Vue
             this.lblMediaTek.Text = "MediaTek86";
             this.lblMediaTek.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // frmAuthentifications
+            // frmAuthentification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -127,7 +129,7 @@ namespace MediaTek86.Vue
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtIdentifiant);
             this.Controls.Add(this.lblIdentifiant);
-            this.Name = "frmAuthentifications";
+            this.Name = "frmAuthentification";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Authentification";
