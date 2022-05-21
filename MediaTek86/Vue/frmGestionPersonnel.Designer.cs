@@ -323,7 +323,7 @@ namespace MediaTek86.Vue
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(661, 749);
+            this.ClientSize = new System.Drawing.Size(661, 772);
             this.Controls.Add(this.lblPrenom);
             this.Controls.Add(this.btnVider);
             this.Controls.Add(this.lblMail);
