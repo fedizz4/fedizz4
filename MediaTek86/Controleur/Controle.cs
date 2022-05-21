@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using MediaTek86.Controleur;
 using MediaTek86.Dal;
 using MySql.Data.MySqlClient;
+using MediaTek86.Modele;
 
 
 namespace MediaTek86.Controleur
@@ -54,6 +55,15 @@ namespace MediaTek86.Controleur
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Récupère les infos du personnel provenant de la BDD pour les envoyer dans la fonction de remplissage de la datagrid
+        /// </summary>
+        /// <returns>liste des personnels</returns>
+        public List<Personnel> GetLesPersonnels()
+        {
+            return AccesDonnees.GetLesPersonnels();
         }
     }
 }
