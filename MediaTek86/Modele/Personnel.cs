@@ -1,4 +1,4 @@
-﻿namespace Mediatek.Modele
+﻿namespace MediaTek86.Modele
 {
     /// <summary>
     /// Création de la classe métier pour la table Personnel

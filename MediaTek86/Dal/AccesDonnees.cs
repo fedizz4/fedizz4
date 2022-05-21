@@ -4,7 +4,7 @@ using MediaTek86.Connexion;
 
 namespace MediaTek86.Dal
 {
-    class AccesDonnees
+    public class AccesDonnees
     {
         // <summary>
         /// Chaine de connexion à la BDD Mediatek
