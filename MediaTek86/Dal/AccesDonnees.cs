@@ -43,7 +43,7 @@ namespace MediaTek86.Dal
         }
 
         /// <summary>
-        /// Récupération des données de la liste des personnels pour l'afficher dans la datagrid
+        /// Récupération des données de la liste des personnels
         /// </summary>
         /// <returns>liste des personnels</returns>
         public static List<Personnel> GetLesPersonnels()
@@ -71,6 +71,26 @@ namespace MediaTek86.Dal
             }
             curseur.Close();
             return lesPersonnels;
+        }
+
+        /// <summary>
+        /// Récupération des données de la liste des services
+        /// </summary>
+        /// <returns>Liste des services</returns>
+        public static List<Service> GetLesServices()
+        {
+            List<Service> lesServices = new List<Service>();
+            string req = "SELECT * FROM service";
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            curseur.ReqSelect(req, null);
+            while (curseur.Read())
+            {
+                Service service = new Service((int)curseur.Field("IDSERVICE"),
+                    (string)curseur.Field("NOM"));
+                lesServices.Add(service);
+            }
+            curseur.Close();
+            return lesServices;
         }
 
     }

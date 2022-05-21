@@ -65,5 +65,14 @@ namespace MediaTek86.Controleur
         {
             return AccesDonnees.GetLesPersonnels();
         }
+
+        /// <summary>
+        /// Récupère et retourne les infos des services provenant de la BDD
+        /// </summary>
+        /// <returns>liste des services</returns>
+        public List<Service> GetLesServices()
+        {
+            return AccesDonnees.GetLesServices();
+        }
     }
 }

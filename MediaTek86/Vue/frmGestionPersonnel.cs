@@ -28,6 +28,7 @@ namespace MediaTek86.Vue
         ///Création des objets bindingSource
         /// </summary>
         BindingSource bdgPersonnel = new BindingSource();
+        BindingSource bdgService = new BindingSource();
 
         /// <summary>
         /// Initialisation de l'interface graphique
@@ -47,6 +48,7 @@ namespace MediaTek86.Vue
         public void Init()
         {
             AfficherDGVPersonnels();
+            RemplirCboServices();
         }
 
         /// <summary>
@@ -60,6 +62,16 @@ namespace MediaTek86.Vue
             dgvPersonnel.Columns["idpersonnel"].Visible = false;//On cache l'id du personnel et du service car c'est pas utile pour l'utilisateur de voir les numéros
             dgvPersonnel.Columns["idservice"].Visible = true;
             dgvPersonnel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        /// <summary>
+        /// Affiche les services dans la cboBox
+        /// </summary>
+        public void RemplirCboServices()
+        {
+            List<Service> lesServices = controle.GetLesServices();
+            bdgService.DataSource = lesServices;
+            cboServices.DataSource = bdgService;
         }
 
     }
