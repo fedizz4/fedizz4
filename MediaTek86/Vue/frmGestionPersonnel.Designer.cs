@@ -100,6 +100,7 @@ namespace MediaTek86.Vue
             this.dgvPersonnel.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvPersonnel.Size = new System.Drawing.Size(612, 254);
             this.dgvPersonnel.TabIndex = 60;
+            this.dgvPersonnel.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonnels_CellEnter);
             // 
             // lblGestion
             // 
@@ -173,6 +174,7 @@ namespace MediaTek86.Vue
             this.btnAjouter.TabIndex = 9;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = false;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click);
             // 
             // btnModifier
             // 
@@ -185,6 +187,7 @@ namespace MediaTek86.Vue
             this.btnModifier.TabIndex = 10;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = false;
+            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
             // 
             // btnSupprimer
             // 
@@ -197,6 +200,7 @@ namespace MediaTek86.Vue
             this.btnSupprimer.TabIndex = 11;
             this.btnSupprimer.Text = "Supprimer";
             this.btnSupprimer.UseVisualStyleBackColor = false;
+            this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
             // btnAbsences
             // 
@@ -209,6 +213,7 @@ namespace MediaTek86.Vue
             this.btnAbsences.TabIndex = 12;
             this.btnAbsences.Text = "Gestion des absences";
             this.btnAbsences.UseVisualStyleBackColor = false;
+            this.btnAbsences.Click += new System.EventHandler(this.btnAbsences_Click);
             // 
             // cboServices
             // 
@@ -306,6 +311,7 @@ namespace MediaTek86.Vue
             this.btnVider.TabIndex = 61;
             this.btnVider.Text = "Vider";
             this.btnVider.UseVisualStyleBackColor = false;
+            this.btnVider.Click += new System.EventHandler(this.btnVider_Click);
             // 
             // lblPrenom
             // 

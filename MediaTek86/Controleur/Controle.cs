@@ -74,5 +74,34 @@ namespace MediaTek86.Controleur
         {
             return AccesDonnees.GetLesServices();
         }
+
+        /// <summary>
+        /// Demande d'ajout d'un personnel
+        /// </summary>
+        /// <param name="personnel">personne à modifier</param>
+        public void AjouterPersonnel(Personnel personnel)
+        {
+            AccesDonnees.AjouterPersonnel(personnel);
+        }
+
+
+        /// <summary>
+        /// Demande de modification d'un personnel
+        /// </summary>
+        /// <param name="personnel"></param>
+        public void ModifierPersonnel(Personnel personnel)
+        {
+            AccesDonnees.ModifierPersonnel(personnel);
+        }
+
+        /// <summary>
+        /// Demande de suppression d'un développeur
+        /// </summary>
+        /// <param name="personnel">objet developpeur à supprimer</param>
+        public void SupprimerPersonnel(Personnel personnel)
+        {
+            AccesDonnees.SupprimerPersonnel(personnel);
+        }
+
     }
 }

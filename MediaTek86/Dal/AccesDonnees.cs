@@ -6,16 +6,19 @@ using MediaTek86.Modele;
 
 namespace MediaTek86.Dal
 {
+    /// <summary>
+    /// Gère les récupérations des données de la base de données
+    /// </summary>
     public class AccesDonnees
     {
-        // <summary>
+        /// <summary>
         /// Chaine de connexion à la BDD Mediatek
         /// </summary>
         private static string connectionString = "server=localhost;database=mediatek86;uid=root;pwd=@Azerty85!;";
 
         /// <summary>
         /// Fenêtre d'authentification 
-        /// Vérification que les identifiants correspondent bien à ceux de la table "Responsable"
+        /// Les identifiants doivent correspondre à ceux de la table "Responsable"
         /// </summary>
         /// <param name="login"></param>
         /// <param name="pwd"></param>
@@ -43,6 +46,7 @@ namespace MediaTek86.Dal
         }
 
         /// <summary>
+        /// Fenêtre de gestion des personnels
         /// Récupération des données de la liste des personnels
         /// </summary>
         /// <returns>liste des personnels</returns>
@@ -79,6 +83,9 @@ namespace MediaTek86.Dal
         /// <returns>Liste des services</returns>
         public static List<Service> GetLesServices()
         {
+            /// <summary>
+            /// Récupération de l'ID et du Nom du service
+            /// </summary>
             List<Service> lesServices = new List<Service>();
             string req = "SELECT * FROM service";
             ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
@@ -92,6 +99,61 @@ namespace MediaTek86.Dal
             curseur.Close();
             return lesServices;
         }
+
+        /// <summary>
+        /// Ajouter un personnel
+        /// </summary>
+        ///<param name="personnel">Personnel à ajouter</param>"
+        public static void AjouterPersonnel(Personnel personnel)
+        {
+    
+            string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice) ";
+            req += "SELECT * FROM(SELECT @nom AS nom, @prenom AS prenom, @tel AS tel, @mail AS mail, @idservice AS idservice) AS req ";
+            req += "WHERE NOT EXISTS(SELECT nom, prenom FROM personnel WHERE nom = @nom AND prenom = @prenom); ";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@nom", personnel.Nom);
+            parameters.Add("@prenom", personnel.Prenom);
+            parameters.Add("@tel", personnel.Tel);
+            parameters.Add("@mail", personnel.Mail);
+            parameters.Add("@idservice", personnel.Idservice);
+            ConnexionBDD connexion = ConnexionBDD.GetInstance(connectionString);
+            connexion.ReqUpdate(req, parameters); 
+
+        }
+
+        /// <summary>
+        /// Modification d'un personnel
+        /// </summary>
+        /// <param name="personnel"></param>
+        public static void ModifierPersonnel(Personnel personnel)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", personnel.Idpersonnel);
+            parameters.Add("@nom", personnel.Nom);
+            parameters.Add("@prenom", personnel.Prenom);
+            parameters.Add("@tel", personnel.Tel);
+            parameters.Add("@mail", personnel.Mail);
+            parameters.Add("@idservice", personnel.Idservice);
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            string req = "UPDATE personnel SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idservice = @idservice WHERE idpersonnel = @idpersonnel";
+            curseur.ReqUpdate(req, parameters);
+        }
+
+
+        /// <summary>
+        /// Suppression d'un personnel
+        /// </summary>
+        /// <param name="personnel">objet developpeur à supprimer</param>
+        public static void SupprimerPersonnel(Personnel personnel)
+        {
+            string req = "delete from personnel where idpersonnel = @idpersonnel;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", personnel.Idpersonnel);
+            ConnexionBDD connexion = ConnexionBDD.GetInstance(connectionString);
+            connexion.ReqUpdate(req, parameters);
+        }
+
 
     }
 }
