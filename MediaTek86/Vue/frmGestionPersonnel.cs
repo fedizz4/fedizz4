@@ -134,9 +134,11 @@ namespace MediaTek86.Vue
              {
                     Service service = (Service)bdgService.List[bdgService.Position];
                     Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                    personnel = new Personnel(personnel.Idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text, txtMail.Text, service.Idservice, service.Nom);
+                    personnel = new Personnel(personnel.Idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text,
+                        txtMail.Text, service.Idservice, service.Nom);
 
-                if (MessageBox.Show("Voulez-vous modifier les informations de "+personnel.Nom+" " + personnel.Prenom + " ?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("Voulez-vous modifier les informations de "+personnel.Nom+" " + personnel.Prenom + " ?",
+                    "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     controle.ModifierPersonnel(personnel);
                     AfficherDGVPersonnels();
@@ -154,7 +156,8 @@ namespace MediaTek86.Vue
             if (dgvPersonnel.SelectedRows.Count > 0)
             {
                 Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                if (MessageBox.Show("Voulez-vous supprimer " + personnel.Nom + " " + personnel.Prenom + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes) ;
+                if (MessageBox.Show("Voulez-vous supprimer " + personnel.Nom + " " + personnel.Prenom + " ?", 
+                    "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes) ;
                 {
                     controle.SupprimerPersonnel(personnel);
                     AfficherDGVPersonnels();
@@ -166,9 +169,26 @@ namespace MediaTek86.Vue
             }
         }
 
-        private void btnAbsences_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Affichage de la fenêtre de gestion des absences
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAbsences_Click(object sender, System.EventArgs e)
         {
-
+            if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals(""))
+            {
+                if (!controle.Absences(txtNom.Text, txtPrenom.Text))
+                {
+                    txtNom.Text = "";
+                    txtPrenom.Text = "";
+                    txtNom.Focus();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
+            }
         }
 
         /// <summary>

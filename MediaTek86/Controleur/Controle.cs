@@ -30,6 +30,7 @@ namespace MediaTek86.Controleur
         {
             frmAuthentification = new frmAuthentification(this);
             frmAuthentification.ShowDialog();
+
         }
 
         /// <summary>
@@ -56,6 +57,41 @@ namespace MediaTek86.Controleur
                 return false;
             }
         }
+
+
+        /// <summary>
+        /// La fenêtre de gestion des absences apparait 
+        /// </summary>
+        /// <param name="nom"></param>
+        /// <param name="prenom"></param>
+        /// <returns></returns>
+        public Boolean Absences(string nom, string prenom)
+        {
+            if (AccesDonnees.Absences(nom, prenom))
+            {
+                ///<summary>
+                /// Il faut masquer la fenêtre de gestionPersonnel
+                ///Pour afficher ensuite la fenêtre de gestionAbsence
+                ///</summary>
+                (new frmGestionAbsences(this)).ShowDialog();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Récupère et retourne les infos des personnels provenant de la BDD
@@ -102,6 +138,8 @@ namespace MediaTek86.Controleur
         {
             AccesDonnees.SupprimerPersonnel(personnel);
         }
+
+
 
     }
 }

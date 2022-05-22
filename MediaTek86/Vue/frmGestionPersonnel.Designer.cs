@@ -211,7 +211,7 @@ namespace MediaTek86.Vue
             this.btnAbsences.Name = "btnAbsences";
             this.btnAbsences.Size = new System.Drawing.Size(232, 33);
             this.btnAbsences.TabIndex = 12;
-            this.btnAbsences.Text = "Gestion des absences";
+            this.btnAbsences.Text = "Gérer les absences";
             this.btnAbsences.UseVisualStyleBackColor = false;
             this.btnAbsences.Click += new System.EventHandler(this.btnAbsences_Click);
             // 

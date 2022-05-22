@@ -43,9 +43,9 @@ namespace MediaTek86.Vue
             this.txtNom = new System.Windows.Forms.TextBox();
             this.lblPrenom = new System.Windows.Forms.Label();
             this.txtPrenom = new System.Windows.Forms.TextBox();
-            this.btnAjouter = new System.Windows.Forms.Button();
-            this.btnModifier = new System.Windows.Forms.Button();
-            this.btnSupprimer = new System.Windows.Forms.Button();
+            this.btnAjouterAbs = new System.Windows.Forms.Button();
+            this.btnModifierAbs = new System.Windows.Forms.Button();
+            this.btnSupprimerAbs = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
             this.dgvAbsences = new System.Windows.Forms.DataGridView();
             this.dtpDebut = new System.Windows.Forms.DateTimePicker();
@@ -156,41 +156,41 @@ namespace MediaTek86.Vue
             this.txtPrenom.Size = new System.Drawing.Size(130, 18);
             this.txtPrenom.TabIndex = 28;
             // 
-            // btnAjouter
+            // btnAjouterAbs
             // 
-            this.btnAjouter.BackColor = System.Drawing.Color.SandyBrown;
-            this.btnAjouter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAjouter.ForeColor = System.Drawing.Color.White;
-            this.btnAjouter.Location = new System.Drawing.Point(403, 492);
-            this.btnAjouter.Name = "btnAjouter";
-            this.btnAjouter.Size = new System.Drawing.Size(169, 36);
-            this.btnAjouter.TabIndex = 29;
-            this.btnAjouter.Text = "Ajouter";
-            this.btnAjouter.UseVisualStyleBackColor = false;
+            this.btnAjouterAbs.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnAjouterAbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAjouterAbs.ForeColor = System.Drawing.Color.White;
+            this.btnAjouterAbs.Location = new System.Drawing.Point(403, 492);
+            this.btnAjouterAbs.Name = "btnAjouterAbs";
+            this.btnAjouterAbs.Size = new System.Drawing.Size(169, 36);
+            this.btnAjouterAbs.TabIndex = 29;
+            this.btnAjouterAbs.Text = "Ajouter";
+            this.btnAjouterAbs.UseVisualStyleBackColor = false;
             // 
-            // btnModifier
+            // btnModifierAbs
             // 
-            this.btnModifier.BackColor = System.Drawing.Color.Chocolate;
-            this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifier.ForeColor = System.Drawing.Color.White;
-            this.btnModifier.Location = new System.Drawing.Point(403, 555);
-            this.btnModifier.Name = "btnModifier";
-            this.btnModifier.Size = new System.Drawing.Size(169, 36);
-            this.btnModifier.TabIndex = 30;
-            this.btnModifier.Text = "Modifier";
-            this.btnModifier.UseVisualStyleBackColor = false;
+            this.btnModifierAbs.BackColor = System.Drawing.Color.Chocolate;
+            this.btnModifierAbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModifierAbs.ForeColor = System.Drawing.Color.White;
+            this.btnModifierAbs.Location = new System.Drawing.Point(403, 555);
+            this.btnModifierAbs.Name = "btnModifierAbs";
+            this.btnModifierAbs.Size = new System.Drawing.Size(169, 36);
+            this.btnModifierAbs.TabIndex = 30;
+            this.btnModifierAbs.Text = "Modifier";
+            this.btnModifierAbs.UseVisualStyleBackColor = false;
             // 
-            // btnSupprimer
+            // btnSupprimerAbs
             // 
-            this.btnSupprimer.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnSupprimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSupprimer.ForeColor = System.Drawing.Color.White;
-            this.btnSupprimer.Location = new System.Drawing.Point(403, 615);
-            this.btnSupprimer.Name = "btnSupprimer";
-            this.btnSupprimer.Size = new System.Drawing.Size(169, 36);
-            this.btnSupprimer.TabIndex = 31;
-            this.btnSupprimer.Text = "Supprimer";
-            this.btnSupprimer.UseVisualStyleBackColor = false;
+            this.btnSupprimerAbs.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnSupprimerAbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSupprimerAbs.ForeColor = System.Drawing.Color.White;
+            this.btnSupprimerAbs.Location = new System.Drawing.Point(403, 615);
+            this.btnSupprimerAbs.Name = "btnSupprimerAbs";
+            this.btnSupprimerAbs.Size = new System.Drawing.Size(169, 36);
+            this.btnSupprimerAbs.TabIndex = 31;
+            this.btnSupprimerAbs.Text = "Supprimer";
+            this.btnSupprimerAbs.UseVisualStyleBackColor = false;
             // 
             // btnRetour
             // 
@@ -329,9 +329,9 @@ namespace MediaTek86.Vue
             this.Controls.Add(this.dtpDebut);
             this.Controls.Add(this.dgvAbsences);
             this.Controls.Add(this.btnRetour);
-            this.Controls.Add(this.btnSupprimer);
-            this.Controls.Add(this.btnModifier);
-            this.Controls.Add(this.btnAjouter);
+            this.Controls.Add(this.btnSupprimerAbs);
+            this.Controls.Add(this.btnModifierAbs);
+            this.Controls.Add(this.btnAjouterAbs);
             this.Controls.Add(this.txtPrenom);
             this.Controls.Add(this.lblPrenom);
             this.Controls.Add(this.txtNom);
@@ -362,9 +362,9 @@ namespace MediaTek86.Vue
         private System.Windows.Forms.TextBox txtNom;
         private System.Windows.Forms.Label lblPrenom;
         private System.Windows.Forms.TextBox txtPrenom;
-        private System.Windows.Forms.Button btnAjouter;
-        private System.Windows.Forms.Button btnModifier;
-        private System.Windows.Forms.Button btnSupprimer;
+        private System.Windows.Forms.Button btnAjouterAbs;
+        private System.Windows.Forms.Button btnModifierAbs;
+        private System.Windows.Forms.Button btnSupprimerAbs;
         private System.Windows.Forms.Button btnRetour;
         private System.Windows.Forms.DataGridView dgvAbsences;
         private System.Windows.Forms.DateTimePicker dtpDebut;
