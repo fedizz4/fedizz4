@@ -47,7 +47,7 @@ namespace MediaTek86.Vue
         /// <param name="e"></param>
         private void btnConnexion_Click(object sender, EventArgs e)
         {
-            {
+  
                 if (!txtIdentifiant.Text.Equals("") && !txtPassword.Text.Equals(""))
                 {
                     if (!controle.Authentification(txtIdentifiant.Text, txtPassword.Text))
@@ -62,7 +62,7 @@ namespace MediaTek86.Vue
                 {
                     MessageBox.Show("Tous les champs doivent être remplis.", "Information");
                 }
-            }
+            
         }
 
         /// <summary>
@@ -82,8 +82,6 @@ namespace MediaTek86.Vue
             }
         }
     }
-
-    
   
 }
 

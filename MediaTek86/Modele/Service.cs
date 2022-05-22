@@ -13,7 +13,7 @@
         public string Nom { get => NOM; }
 
         /// <summary>
-        /// Appel du construction pour accéder à la table des services et remplir la cboServices
+        /// Constructeur : Valorise les propriétés
         /// </summary>
         /// <param name="idservice"></param>
         /// <param name="nom"></param>
@@ -24,9 +24,9 @@
         }
 
         /// <summary>
-        /// On souhaite afficher le nom du service, c'est plus clair que d'afficher l'id du service
+        /// Définit l'information à afficher (juste le nom)
         /// </summary>
-        /// <returns>nom du service</returns>
+        /// <returns>Nom du service</returns>
         public override string ToString()
         {
             return this.NOM;

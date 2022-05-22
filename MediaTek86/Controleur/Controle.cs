@@ -14,7 +14,7 @@ using MediaTek86.Modele;
 namespace MediaTek86.Controleur
 {
     /// <summary>
-    /// Création du controleur
+    /// Gère les interactions entre la vue et le modèle
     /// </summary>
     public class Controle
     {
@@ -58,7 +58,7 @@ namespace MediaTek86.Controleur
         }
 
         /// <summary>
-        /// Récupère les infos du personnel provenant de la BDD pour les envoyer dans la fonction de remplissage de la datagrid
+        /// Récupère et retourne les infos des personnels provenant de la BDD
         /// </summary>
         /// <returns>liste des personnels</returns>
         public List<Personnel> GetLesPersonnels()
@@ -78,7 +78,7 @@ namespace MediaTek86.Controleur
         /// <summary>
         /// Demande d'ajout d'un personnel
         /// </summary>
-        /// <param name="personnel">personne à modifier</param>
+        /// <param name="personnel">Personnel à modifier</param>
         public void AjouterPersonnel(Personnel personnel)
         {
             AccesDonnees.AjouterPersonnel(personnel);
@@ -95,9 +95,9 @@ namespace MediaTek86.Controleur
         }
 
         /// <summary>
-        /// Demande de suppression d'un développeur
+        /// Demande de suppression d'un personnel
         /// </summary>
-        /// <param name="personnel">objet developpeur à supprimer</param>
+        /// <param name="personnel">Objet personnel à supprimer</param>
         public void SupprimerPersonnel(Personnel personnel)
         {
             AccesDonnees.SupprimerPersonnel(personnel);

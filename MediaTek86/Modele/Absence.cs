@@ -23,7 +23,7 @@ namespace MediaTek86.Modele
 
 
         /// <summary>
-        /// Appel d'un constructeur pour accéder à la table des absences et la remplir
+        /// Constructeur : Valorise les propriétés
         /// </summary>
         /// <param name="datedebut"></param>
         /// <param name="datefin"></param>

@@ -25,7 +25,7 @@
 
 
         /// <summary>
-        /// Appel du constructeur pour accéder à la table Personel et la remplir 
+        /// Constructeur : Valorise les propriétés
         /// </summary>
         /// <param name="idpersonnel"></param>
         /// <param name="nom"></param>

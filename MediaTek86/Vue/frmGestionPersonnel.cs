@@ -29,13 +29,13 @@ namespace MediaTek86.Vue
         private Boolean afficher;
 
         ///<summary>
-        ///Création des objets bindingSource
+        ///Création des objets pour gérer les listes
         /// </summary>
         BindingSource bdgPersonnel = new BindingSource();
         BindingSource bdgService = new BindingSource();
 
         /// <summary>
-        /// Initialisation de l'interface graphique
+        /// Initialisation des composants graphiques
         /// Récupération du controleur 
         /// </summary>
         /// <param name="controle"></param>
@@ -47,7 +47,7 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
-        /// Initialisation de la datagrid remplie
+        /// Initialisation de la frame : remplissage des listes
         /// </summary>
         private void Init()
         {
@@ -62,10 +62,13 @@ namespace MediaTek86.Vue
         /// </summary>
         private void AfficherDGVPersonnels()
         {
-            List<Personnel> lesPersonnels = controle.GetLesPersonnels();//Appel des fonctions du controleur
+            List<Personnel> lesPersonnels = controle.GetLesPersonnels();
             bdgPersonnel.DataSource = lesPersonnels;
             dgvPersonnel.DataSource = bdgPersonnel;
-            dgvPersonnel.Columns["idpersonnel"].Visible = false;//On cache l'id du personnel et du service car c'est pas utile pour l'utilisateur de voir les numéros
+            ///<summary>
+            ///On masque l'idpersonnel et l'idservice 
+            /// </summary>
+            dgvPersonnel.Columns["idpersonnel"].Visible = false;
             dgvPersonnel.Columns["idservice"].Visible = true;
             dgvPersonnel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
@@ -99,7 +102,7 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
-        /// Procédure évènementielle ajout d'un personnel
+        /// Demande d'ajout d'un personnel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -110,10 +113,9 @@ namespace MediaTek86.Vue
                 int idpersonnel = 0;
                 Service service = (Service)bdgService.List[bdgService.Position];
                 Personnel personnel = new Personnel(idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text, txtMail.Text, service.Idservice, service.Nom);
-
                 controle.AjouterPersonnel(personnel);
                 AfficherDGVPersonnels(); 
-                MessageBox.Show("Le personnel a été ajouté avec succès.", "Information");
+                MessageBox.Show("Le personnel "+personnel.Nom + " " + personnel.Prenom +"a été ajouté avec succès.", "Information");
             }
             else
             {
@@ -134,7 +136,7 @@ namespace MediaTek86.Vue
                     Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
                     personnel = new Personnel(personnel.Idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text, txtMail.Text, service.Idservice, service.Nom);
 
-                if (MessageBox.Show("Voulez-vous modifier les informations de ce personnel ?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("Voulez-vous modifier les informations de "+personnel.Nom+" " + personnel.Prenom + " ?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     controle.ModifierPersonnel(personnel);
                     AfficherDGVPersonnels();
@@ -152,7 +154,7 @@ namespace MediaTek86.Vue
             if (dgvPersonnel.SelectedRows.Count > 0)
             {
                 Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                if (MessageBox.Show("Voulez-vous supprimer" + personnel.Nom + "" + personnel.Prenom + "?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes) ;
+                if (MessageBox.Show("Voulez-vous supprimer " + personnel.Nom + " " + personnel.Prenom + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes) ;
                 {
                     controle.SupprimerPersonnel(personnel);
                     AfficherDGVPersonnels();
@@ -170,7 +172,7 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
-        /// Vider les champs
+        /// Vider les zones de saisie
         /// </summary>
         private void Vider()
         {

@@ -7,12 +7,12 @@ using MediaTek86.Modele;
 namespace MediaTek86.Dal
 {
     /// <summary>
-    /// Gère les récupérations des données de la base de données
+    /// Classe permettant de gérer les demandes concernant les données distantes
     /// </summary>
     public class AccesDonnees
     {
         /// <summary>
-        /// Chaine de connexion à la BDD Mediatek
+        /// Chaine de connexion à la BDD MediaTek86
         /// </summary>
         private static string connectionString = "server=localhost;database=mediatek86;uid=root;pwd=@Azerty85!;";
 
@@ -46,10 +46,9 @@ namespace MediaTek86.Dal
         }
 
         /// <summary>
-        /// Fenêtre de gestion des personnels
-        /// Récupération des données de la liste des personnels
+        /// Récupère et retourne les personnels provenant de la BDD
         /// </summary>
-        /// <returns>liste des personnels</returns>
+        /// <returns>Liste des personnels</returns>
         public static List<Personnel> GetLesPersonnels()
         {
             List<Personnel> lesPersonnels = new List<Personnel>();
@@ -60,8 +59,12 @@ namespace MediaTek86.Dal
             string req = "SELECT p.idpersonnel AS IDPERSONNEL, p.nom AS NOM, p.prenom AS PRENOM, p.tel AS TEL, p.mail AS MAIL, s.idservice AS IDSERVICE, s.nom AS 'SERVICE'";
             req += "FROM personnel p JOIN service s USING(IDSERVICE) GROUP BY p.NOM ORDER BY p.NOM";
 
+            ///<summary>
+            ///Utilisation de la connexion à la BDD pour travailler sur la BDD
+            ///Permet d'exécuter la requête
+            /// </summary>
             ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
-            curseur.ReqSelect(req, null); //Doit utiliser la connexion à la BDD pour travailler sur cette BDD, sert à exécuter la requête
+            curseur.ReqSelect(req, null); 
             while (curseur.Read())
             {
                 Personnel personnel = new Personnel((int)curseur.Field("IDPERSONNEL"),
@@ -101,7 +104,7 @@ namespace MediaTek86.Dal
         }
 
         /// <summary>
-        /// Ajouter un personnel
+        /// Ajoute un personnel
         /// </summary>
         ///<param name="personnel">Personnel à ajouter</param>"
         public static void AjouterPersonnel(Personnel personnel)
@@ -144,7 +147,7 @@ namespace MediaTek86.Dal
         /// <summary>
         /// Suppression d'un personnel
         /// </summary>
-        /// <param name="personnel">objet developpeur à supprimer</param>
+        /// <param name="personnel">Objet personnel à supprimer</param>
         public static void SupprimerPersonnel(Personnel personnel)
         {
             string req = "delete from personnel where idpersonnel = @idpersonnel;";

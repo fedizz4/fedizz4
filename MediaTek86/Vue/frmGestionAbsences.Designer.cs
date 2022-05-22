@@ -161,7 +161,7 @@ namespace MediaTek86.Vue
             this.btnAjouter.BackColor = System.Drawing.Color.SandyBrown;
             this.btnAjouter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAjouter.ForeColor = System.Drawing.Color.White;
-            this.btnAjouter.Location = new System.Drawing.Point(349, 496);
+            this.btnAjouter.Location = new System.Drawing.Point(403, 492);
             this.btnAjouter.Name = "btnAjouter";
             this.btnAjouter.Size = new System.Drawing.Size(169, 36);
             this.btnAjouter.TabIndex = 29;
@@ -173,7 +173,7 @@ namespace MediaTek86.Vue
             this.btnModifier.BackColor = System.Drawing.Color.Chocolate;
             this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModifier.ForeColor = System.Drawing.Color.White;
-            this.btnModifier.Location = new System.Drawing.Point(349, 553);
+            this.btnModifier.Location = new System.Drawing.Point(403, 555);
             this.btnModifier.Name = "btnModifier";
             this.btnModifier.Size = new System.Drawing.Size(169, 36);
             this.btnModifier.TabIndex = 30;
@@ -185,7 +185,7 @@ namespace MediaTek86.Vue
             this.btnSupprimer.BackColor = System.Drawing.Color.SaddleBrown;
             this.btnSupprimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSupprimer.ForeColor = System.Drawing.Color.White;
-            this.btnSupprimer.Location = new System.Drawing.Point(349, 609);
+            this.btnSupprimer.Location = new System.Drawing.Point(403, 615);
             this.btnSupprimer.Name = "btnSupprimer";
             this.btnSupprimer.Size = new System.Drawing.Size(169, 36);
             this.btnSupprimer.TabIndex = 31;
@@ -197,7 +197,7 @@ namespace MediaTek86.Vue
             this.btnRetour.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
             this.btnRetour.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRetour.ForeColor = System.Drawing.Color.White;
-            this.btnRetour.Location = new System.Drawing.Point(394, 670);
+            this.btnRetour.Location = new System.Drawing.Point(372, 670);
             this.btnRetour.Name = "btnRetour";
             this.btnRetour.Size = new System.Drawing.Size(232, 33);
             this.btnRetour.TabIndex = 32;
@@ -307,11 +307,11 @@ namespace MediaTek86.Vue
             this.btnVider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
             this.btnVider.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVider.ForeColor = System.Drawing.Color.White;
-            this.btnVider.Location = new System.Drawing.Point(41, 670);
+            this.btnVider.Location = new System.Drawing.Point(60, 670);
             this.btnVider.Name = "btnVider";
-            this.btnVider.Size = new System.Drawing.Size(80, 33);
+            this.btnVider.Size = new System.Drawing.Size(232, 33);
             this.btnVider.TabIndex = 62;
-            this.btnVider.Text = "Vider";
+            this.btnVider.Text = "Réinitialiser";
             this.btnVider.UseVisualStyleBackColor = false;
             // 
             // frmGestionAbsences

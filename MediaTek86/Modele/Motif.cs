@@ -14,7 +14,7 @@
         public string Libelle { get => libelle; }
 
         /// <summary>
-        /// Appel du constructeur pour accéder à la table des Motifs et remplir la cboMotifs
+        /// Constructeur : valorise les propriétés
         /// </summary>
         /// <param name="idmotif"></param>
         /// <param name="libelle"></param>
@@ -25,9 +25,9 @@
         }
 
         /// <summary>
-        /// On souhaite afficher le libelle du motif
+        /// Définit l'information à afficher (juste le nom)
         /// </summary>
-        /// <returns>nom du motif</returns>
+        /// <returns>Nom du motif</returns>
         public override string ToString()
         {
             return this.libelle;
