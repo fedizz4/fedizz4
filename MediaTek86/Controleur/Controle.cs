@@ -58,7 +58,6 @@ namespace MediaTek86.Controleur
             }
         }
 
-
         /// <summary>
         /// La fenêtre de gestion des absences apparait 
         /// </summary>
@@ -81,17 +80,6 @@ namespace MediaTek86.Controleur
                 return false;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Récupère et retourne les infos des personnels provenant de la BDD
@@ -139,7 +127,14 @@ namespace MediaTek86.Controleur
             AccesDonnees.SupprimerPersonnel(personnel);
         }
 
-
+        /// <summary>
+        /// Récupère et retourne les infos des absences provenant de la BDD
+        /// </summary>
+        /// <returns>liste des personnels</returns>
+        public List<Absence> GetLesAbsences()
+        {
+            return AccesDonnees.GetLesAbsences();
+        }
 
     }
 }

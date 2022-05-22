@@ -27,7 +27,8 @@ namespace MediaTek86.Vue
         ///<summary>
         ///Création des objets pour gérer les listes
         /// </summary>
-        BindingSource bdgAbsences= new BindingSource();
+        BindingSource bdgAbsences = new BindingSource();
+        BindingSource bdgPersonnels = new BindingSource();
         BindingSource bdgMotifs = new BindingSource();
         ///<summary>
         ///Initialisation des composants graphiques
@@ -37,9 +38,28 @@ namespace MediaTek86.Vue
         {
             InitializeComponent();
             this.controle = controle;
+            Init();
+        }
+        private void Init()
+        {
+            RemplirDGVAbsences();
         }
 
+        /// <summary>
+        /// Affiche les absences
+        /// </summary>
+        public void RemplirDGVAbsences()
+        {
+            List<Absence> lesAbsences = controle.GetLesAbsences();
+            bdgAbsences.DataSource = lesAbsences;
+            dgvAbsences.DataSource = bdgAbsences;
+            dgvAbsences.Columns["idpersonnel"].Visible = true;
+            dgvAbsences.Columns["idmotif"].Visible = false;
+            dgvAbsences.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+        }
 
     }
-}
 
+
+}

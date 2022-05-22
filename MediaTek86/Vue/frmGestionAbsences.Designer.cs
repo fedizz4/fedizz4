@@ -206,6 +206,8 @@ namespace MediaTek86.Vue
             // 
             // dgvAbsences
             // 
+            this.dgvAbsences.AllowDrop = true;
+            this.dgvAbsences.AllowUserToOrderColumns = true;
             this.dgvAbsences.BackgroundColor = System.Drawing.Color.Bisque;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Bisque;
@@ -241,7 +243,8 @@ namespace MediaTek86.Vue
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dgvAbsences.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAbsences.Size = new System.Drawing.Size(612, 254);
-            this.dgvAbsences.TabIndex = 33;
+            this.dgvAbsences.TabIndex = 60;
+      
             // 
             // dtpDebut
             // 

@@ -93,7 +93,7 @@ namespace MediaTek86.Dal
             ///Permet d'exécuter la requête
             /// </summary>
             ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
-            curseur.ReqSelect(req, null); 
+            curseur.ReqSelect(req, null);
             while (curseur.Read())
             {
                 Personnel personnel = new Personnel((int)curseur.Field("IDPERSONNEL"),
@@ -138,7 +138,7 @@ namespace MediaTek86.Dal
         ///<param name="personnel">Personnel à ajouter</param>"
         public static void AjouterPersonnel(Personnel personnel)
         {
-    
+
             string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice) ";
             req += "SELECT * FROM(SELECT @nom AS nom, @prenom AS prenom, @tel AS tel, @mail AS mail, @idservice AS idservice) AS req ";
             req += "WHERE NOT EXISTS(SELECT nom, prenom FROM personnel WHERE nom = @nom AND prenom = @prenom); ";
@@ -150,7 +150,7 @@ namespace MediaTek86.Dal
             parameters.Add("@mail", personnel.Mail);
             parameters.Add("@idservice", personnel.Idservice);
             ConnexionBDD connexion = ConnexionBDD.GetInstance(connectionString);
-            connexion.ReqUpdate(req, parameters); 
+            connexion.ReqUpdate(req, parameters);
 
         }
 
@@ -186,5 +186,38 @@ namespace MediaTek86.Dal
             connexion.ReqUpdate(req, parameters);
         }
 
+        /// <summary>
+        /// Récupère et retourne les absences provenant de la BDD
+        /// </summary>
+        /// <param name = "idpersonnel"> idpersonnel du personnel sélectionné</param>
+        /// <returns>Liste des absences</returns>
+        public static List<Absence> GetLesAbsences()
+        {
+            List<Absence> lesAbsences = new List<Absence>();
+            ///<summary>
+            ///Récupère et retourne les absences du personnel sélectionné
+            /// </summary>
+            string req = "SELECT a.datedebut AS 'datedebut', a.datefin AS 'datefin', a.idpersonnel AS 'idpersonnel', a.idmotif AS 'idmotif', m.libelle AS 'motif'FROM absence a JOIN motif m USING (idmotif) ;";
+
+            ///<summary>
+            ///Utilisation de la connexion à la BDD pour travailler sur la BDD
+            ///Permet d'exécuter la requête
+            /// </summary>
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            curseur.ReqSelect(req, null);
+            while (curseur.Read())
+            {
+                Absence absence = new Absence((DateTime)curseur.Field("DATEDEBUT"),
+                    (DateTime)curseur.Field("DATEFIN"),
+                    (int)curseur.Field("IDPERSONNEL"),
+                    (int)curseur.Field("IDMOTIF"),
+                    (string)curseur.Field("MOTIF"));
+                lesAbsences.Add(absence);
+            }
+            curseur.Close();
+            return lesAbsences;
+        }
+
+    
     }
 }
