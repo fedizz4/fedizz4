@@ -15,11 +15,13 @@ namespace MediaTek86.Modele
         private string motif;
 
 
+
         public DateTime Datedebut { get => datedebut.Date; }
         public DateTime Datefin { get => datefin.Date; }
         public int Idpersonnel { get => idpersonnel; }
         public int Idmotif { get => idmotif; }
         public string Motif { get => motif; }
+
 
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace MediaTek86.Modele
             this.idpersonnel = idpersonnel;
             this.idmotif = idmotif;
             this.motif = motif;
+
         }
 
     }

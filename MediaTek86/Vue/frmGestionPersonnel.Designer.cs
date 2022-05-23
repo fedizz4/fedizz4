@@ -56,6 +56,7 @@ namespace MediaTek86.Vue
             this.lblMail = new System.Windows.Forms.Label();
             this.btnVider = new System.Windows.Forms.Button();
             this.lblPrenom = new System.Windows.Forms.Label();
+            this.btn1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -324,12 +325,23 @@ namespace MediaTek86.Vue
             this.lblPrenom.TabIndex = 62;
             this.lblPrenom.Text = "Prenom";
             // 
+            // btn1
+            // 
+            this.btn1.Location = new System.Drawing.Point(41, 53);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(75, 23);
+            this.btn1.TabIndex = 63;
+            this.btn1.Text = "button1";
+            this.btn1.UseVisualStyleBackColor = true;
+   
+            // 
             // frmGestionPersonnel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(661, 772);
+            this.Controls.Add(this.btn1);
             this.Controls.Add(this.lblPrenom);
             this.Controls.Add(this.btnVider);
             this.Controls.Add(this.lblMail);
@@ -384,5 +396,6 @@ namespace MediaTek86.Vue
         private System.Windows.Forms.Label lblMail;
         private System.Windows.Forms.Button btnVider;
         private System.Windows.Forms.Label lblPrenom;
+        private System.Windows.Forms.Button btn1;
     }
 }

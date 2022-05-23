@@ -44,8 +44,7 @@
             this.IDSERVICE = idservice;
             this.SERVICE = service;
         }
-
-
+    
     }
 
 }

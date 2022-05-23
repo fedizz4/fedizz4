@@ -244,7 +244,6 @@ namespace MediaTek86.Vue
             this.dgvAbsences.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAbsences.Size = new System.Drawing.Size(612, 254);
             this.dgvAbsences.TabIndex = 60;
-      
             // 
             // dtpDebut
             // 
@@ -316,6 +315,7 @@ namespace MediaTek86.Vue
             this.btnVider.TabIndex = 62;
             this.btnVider.Text = "Réinitialiser";
             this.btnVider.UseVisualStyleBackColor = false;
+            this.btnVider.Click += new System.EventHandler(this.btnVider_Click);
             // 
             // frmGestionAbsences
             // 

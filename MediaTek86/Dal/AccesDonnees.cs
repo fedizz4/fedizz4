@@ -4,6 +4,7 @@ using MediaTek86.Connexion;
 using MySql.Data.MySqlClient;
 using MediaTek86.Modele;
 
+
 namespace MediaTek86.Dal
 {
     /// <summary>
@@ -157,7 +158,7 @@ namespace MediaTek86.Dal
         /// <summary>
         /// Modification d'un personnel
         /// </summary>
-        /// <param name="personnel"></param>
+        /// <param name="personnel">Personnel à modifier</param>
         public static void ModifierPersonnel(Personnel personnel)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
@@ -176,7 +177,7 @@ namespace MediaTek86.Dal
         /// <summary>
         /// Suppression d'un personnel
         /// </summary>
-        /// <param name="personnel">Objet personnel à supprimer</param>
+        /// <param name="personnel">Personnel à supprimer</param>
         public static void SupprimerPersonnel(Personnel personnel)
         {
             string req = "delete from personnel where idpersonnel = @idpersonnel;";
@@ -189,35 +190,76 @@ namespace MediaTek86.Dal
         /// <summary>
         /// Récupère et retourne les absences provenant de la BDD
         /// </summary>
-        /// <param name = "idpersonnel"> idpersonnel du personnel sélectionné</param>
+        /// <param name="idpersonnel"> id du personnel sélectionné</param>
         /// <returns>Liste des absences</returns>
-        public static List<Absence> GetLesAbsences()
+        public static List<Absence> GetLesAbsences(int idpersonnel)
         {
             List<Absence> lesAbsences = new List<Absence>();
             ///<summary>
             ///Récupère et retourne les absences du personnel sélectionné
-            /// </summary>
-            string req = "SELECT a.datedebut AS 'datedebut', a.datefin AS 'datefin', a.idpersonnel AS 'idpersonnel', a.idmotif AS 'idmotif', m.libelle AS 'motif'FROM absence a JOIN motif m USING (idmotif) ;";
-
-            ///<summary>
-            ///Utilisation de la connexion à la BDD pour travailler sur la BDD
-            ///Permet d'exécuter la requête
-            /// </summary>
+            /// </summary>      
+            string req = "SELECT a.datedebut AS 'datedebut', a.datefin AS 'datefin', a.idpersonnel AS 'idpersonnel', a.idmotif AS 'idmotif', m.libelle AS 'motif' FROM absence a JOIN motif m USING (idmotif)";
+            req += "WHERE idpersonnel=" + idpersonnel + "";
             ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
             curseur.ReqSelect(req, null);
             while (curseur.Read())
             {
                 Absence absence = new Absence((DateTime)curseur.Field("DATEDEBUT"),
                     (DateTime)curseur.Field("DATEFIN"),
-                    (int)curseur.Field("IDPERSONNEL"),
+                    (int)curseur.Field("idpersonnel"),
                     (int)curseur.Field("IDMOTIF"),
                     (string)curseur.Field("MOTIF"));
                 lesAbsences.Add(absence);
             }
             curseur.Close();
             return lesAbsences;
+           
+        }
+        /// <summary>
+        /// Récupération de l'id du personnel sélectionné
+        /// </summary>
+        /// <param name="nom"></param>
+        /// <param name="prenom"></param>
+        /// <returns></returns>
+        public static int recupererIdPersonnel(string nom, string prenom)
+        {
+            // On déclare l'ID à 0 par défaut
+            int idpersonnel = 0;
+
+            // On sélectionne l'ID de la personne 
+            string req = "SELECT idpersonnel FROM personnel WHERE nom='" + nom + "' AND prenom = '" + prenom + "'";
+
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            curseur.ReqSelect(req, null);
+
+            // On loop sur la valeur retournée
+            while (curseur.Read())
+                idpersonnel = (int)curseur.Field("IDPERSONNEL");
+
+            // On renvoie l'id du personnel (0 par défaut, différent si ligne trouvée)
+            return idpersonnel;
         }
 
-    
+        /// <summary>
+        /// Récupère et retourne les motifs provenant de la BDD
+        /// </summary>
+        /// <returns>liste des services</returns>
+        public static List<Motif> GetLesMotifs()
+        {
+            List<Motif> lesMotifs = new List<Motif>();
+            string req = "SELECT * FROM motif ORDER BY libelle;";
+            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
+            curseur.ReqSelect(req, null);
+            while (curseur.Read())
+            {
+                Motif motif = new Motif((int)curseur.Field("idmotif"), (string)curseur.Field("libelle"));
+                lesMotifs.Add(motif);
+            }
+            curseur.Close();
+            return lesMotifs;
+        }
+
     }
+
+
 }

@@ -14,43 +14,66 @@ using MediaTek86.Modele;
 
 namespace MediaTek86.Vue
 {
+    /// <summary>
+    /// Fenêtre de gestion des absences
+    /// </summary>
     public partial class frmGestionAbsences : Form
     {
         ///<summary>
         ///instance du Controleur
         /// </summary>
         private Controle controle;
+
         /// <summary>
-        /// Création d'un booleen pour créer les méthodes ajouter/modifier/supprimer
+        /// Initialisation de la variable idpersonnel
         /// </summary>
-        private Boolean afficher;
+        int idpersonnel;
+
         ///<summary>
         ///Création des objets pour gérer les listes
         /// </summary>
         BindingSource bdgAbsences = new BindingSource();
-        BindingSource bdgPersonnels = new BindingSource();
         BindingSource bdgMotifs = new BindingSource();
-        ///<summary>
-        ///Initialisation des composants graphiques
+
+        /// <summary>
+        /// Initialisation des composants graphiques, ajout des paramètres nom et prenom
+        /// Affichage dans les zones de texte de la frmGestionAbsences
         /// </summary>
         /// <param name="controle"></param>
-        public frmGestionAbsences(Controle controle)
+        /// <param name="nom"></param>
+        /// <param name="prenom"></param>
+        public frmGestionAbsences(Controle controle, string nom, string prenom)
         {
             InitializeComponent();
             this.controle = controle;
+
+            /// <summary>
+            /// Récupération de l'id du personnel sélectionné à l'aide du nom et prénom
+            /// </summary>
+            int idpersonnel = AccesDonnees.recupererIdPersonnel(nom, prenom);
+            this.idpersonnel = idpersonnel;
+            txtNom.Text = nom;
+            txtPrenom.Text = prenom;
+            
             Init();
-        }
-        private void Init()
-        {
-            RemplirDGVAbsences();
         }
 
         /// <summary>
-        /// Affiche les absences
+        /// Initialisation de la frame : remplissage des listes
         /// </summary>
-        public void RemplirDGVAbsences()
+        private void Init()
         {
-            List<Absence> lesAbsences = controle.GetLesAbsences();
+            controle.GetLesAbsences(idpersonnel);
+            RemplirDGVAbsences(idpersonnel);
+            RemplirCboMotifs();
+        }
+
+        /// <summary>
+        /// Affiche la grille des absences
+        /// </summary>
+        public void RemplirDGVAbsences(int idpersonnel)
+        {
+            List<Absence> lesAbsences = controle.GetLesAbsences(idpersonnel);
             bdgAbsences.DataSource = lesAbsences;
             dgvAbsences.DataSource = bdgAbsences;
             dgvAbsences.Columns["idpersonnel"].Visible = true;
@@ -59,7 +82,34 @@ namespace MediaTek86.Vue
 
         }
 
-    }
+        /// <summary>
+        /// Affiche les motifs 
+        /// </summary>
+        public void RemplirCboMotifs()
+        {
+            List<Motif> lesMotifs = controle.GetLesMotifs();
+            bdgMotifs.DataSource = lesMotifs;
+            cboMotifs.DataSource = bdgMotifs;
+        }
 
+        /// <summary>
+        /// Vider les zones de saisie
+        /// </summary>
+        private void Vider()
+        {
+            txtNom.Text = "";
+            txtPrenom.Text = "";
+            dtpDebut.Text = "";
+            dtpFin.Text = "";
+            cboMotifs.SelectedIndex = -1;
+            dgvAbsences.ClearSelection();
+            txtNom.Focus();
+        }
+
+        private void btnVider_Click(object sender, EventArgs e)
+        {
+            Vider();
+        }
+    }
 
 }

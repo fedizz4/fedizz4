@@ -23,6 +23,9 @@ namespace MediaTek86.Controleur
         /// </summary>
         private frmAuthentification frmAuthentification;
 
+        frmGestionAbsences abc;
+        frmGestionPersonnel abcd;
+
         /// <summary>
         /// Ouverture de la fenêtre
         /// </summary>
@@ -57,6 +60,7 @@ namespace MediaTek86.Controleur
                 return false;
             }
         }
+   
 
         /// <summary>
         /// La fenêtre de gestion des absences apparait 
@@ -66,21 +70,14 @@ namespace MediaTek86.Controleur
         /// <returns></returns>
         public Boolean Absences(string nom, string prenom)
         {
-            if (AccesDonnees.Absences(nom, prenom))
-            {
-                ///<summary>
-                /// Il faut masquer la fenêtre de gestionPersonnel
-                ///Pour afficher ensuite la fenêtre de gestionAbsence
-                ///</summary>
-                (new frmGestionAbsences(this)).ShowDialog();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            /// <summary>
+            /// Stockage de la frmGestionAbsences dans une variable "abc"
+            /// </summary>
+            frmGestionAbsences abc = new frmGestionAbsences(this, nom, prenom);
+            abc.ShowDialog();
+            return true;
         }
-
+    
         /// <summary>
         /// Récupère et retourne les infos des personnels provenant de la BDD
         /// </summary>
@@ -130,10 +127,20 @@ namespace MediaTek86.Controleur
         /// <summary>
         /// Récupère et retourne les infos des absences provenant de la BDD
         /// </summary>
-        /// <returns>liste des personnels</returns>
-        public List<Absence> GetLesAbsences()
+        /// <returns>liste des absences/returns>
+        public List<Absence> GetLesAbsences(int idpersonnel = 0)
         {
-            return AccesDonnees.GetLesAbsences();
+            return AccesDonnees.GetLesAbsences(idpersonnel);
+
+        }
+
+        /// <summary>
+        /// Récupère et retourne les infos des motifs provenant de la BDD
+        /// </summary>
+        /// <returns>liste des motifs</returns>
+        public List<Motif> GetLesMotifs()
+        {
+            return AccesDonnees.GetLesMotifs();
         }
 
     }

@@ -23,10 +23,6 @@ namespace MediaTek86.Vue
         ///instance du Controleur
         /// </summary>
         private Controle controle;
-        /// <summary>
-        /// Création d'un booleen pour créer les méthodes ajouter/modifier/supprimer
-        /// </summary>
-        private Boolean afficher;
 
         ///<summary>
         ///Création des objets pour gérer les listes
@@ -58,16 +54,13 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
-        /// Méthode pour afficher la liste des personnels dans la datagrid "Personnel"
+        /// Affiche la liste des personnels dans la datagrid "Personnel"
         /// </summary>
-        private void AfficherDGVPersonnels()
+        public void AfficherDGVPersonnels()
         {
             List<Personnel> lesPersonnels = controle.GetLesPersonnels();
             bdgPersonnel.DataSource = lesPersonnels;
             dgvPersonnel.DataSource = bdgPersonnel;
-            ///<summary>
-            ///On masque l'idpersonnel et l'idservice 
-            /// </summary>
             dgvPersonnel.Columns["idpersonnel"].Visible = false;
             dgvPersonnel.Columns["idservice"].Visible = true;
             dgvPersonnel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -91,7 +84,7 @@ namespace MediaTek86.Vue
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvPersonnels_CellEnter(object sender, DataGridViewCellEventArgs e)
+        public void dgvPersonnels_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dgvPersonnel.CurrentRow;
             txtNom.Text = row.Cells["Nom"].Value.ToString();
@@ -120,7 +113,8 @@ namespace MediaTek86.Vue
             else
             {
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
-            }          
+            }
+    
         }
     
         /// <summary>
@@ -176,20 +170,10 @@ namespace MediaTek86.Vue
         /// <param name="e"></param>
         private void btnAbsences_Click(object sender, System.EventArgs e)
         {
-            if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals(""))
-            {
-                if (!controle.Absences(txtNom.Text, txtPrenom.Text))
-                {
-                    txtNom.Text = "";
-                    txtPrenom.Text = "";
-                    txtNom.Focus();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
-            }
+            controle.Absences(txtNom.Text, txtPrenom.Text);
         }
+
+
 
         /// <summary>
         /// Vider les zones de saisie
@@ -209,5 +193,6 @@ namespace MediaTek86.Vue
         {
             Vider();
         }
+
     }
 }
