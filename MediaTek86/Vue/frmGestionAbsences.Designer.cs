@@ -180,7 +180,6 @@ namespace MediaTek86.Vue
             this.btnModifierAbs.TabIndex = 30;
             this.btnModifierAbs.Text = "Modifier";
             this.btnModifierAbs.UseVisualStyleBackColor = false;
-            this.btnModifierAbs.Click += new System.EventHandler(this.btnModifierAbs_Click);
             // 
             // btnSupprimerAbs
             // 
@@ -193,6 +192,7 @@ namespace MediaTek86.Vue
             this.btnSupprimerAbs.TabIndex = 31;
             this.btnSupprimerAbs.Text = "Supprimer";
             this.btnSupprimerAbs.UseVisualStyleBackColor = false;
+            this.btnSupprimerAbs.Click += new System.EventHandler(this.btnSupprimerAbs_Click);
             // 
             // btnRetour
             // 
@@ -246,6 +246,7 @@ namespace MediaTek86.Vue
             this.dgvAbsences.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAbsences.Size = new System.Drawing.Size(612, 254);
             this.dgvAbsences.TabIndex = 60;
+            this.dgvAbsences.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAbsences_CellEnter);
             // 
             // dtpDebut
             // 

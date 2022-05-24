@@ -55,7 +55,7 @@ namespace MediaTek86.Vue
             this.idpersonnel = idpersonnel;
             txtNom.Text = nom;
             txtPrenom.Text = prenom;
-            
+
             Init();
         }
 
@@ -81,6 +81,20 @@ namespace MediaTek86.Vue
             dgvAbsences.Columns["idmotif"].Visible = false;
             dgvAbsences.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
+        }
+
+
+        /// <summary>
+        /// Affiche les informations de l'absence sélectionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void dgvAbsences_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dgvAbsences.CurrentRow;
+            dtpDebut.Value = (DateTime)row.Cells["Datedebut"].Value;
+            dtpFin.Value = (DateTime)row.Cells["Datefin"].Value;
+            cboMotifs.Text = row.Cells["Motif"].Value.ToString();
         }
 
         /// <summary>
@@ -130,13 +144,27 @@ namespace MediaTek86.Vue
             }
 
         }
-
-        private void btnModifierAbs_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Supprimer l'absence du personnel sélectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSupprimerAbs_Click(object sender, EventArgs e)
         {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {           
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
 
-
-
+                if (MessageBox.Show("Voulez-vous vraiment supprimer l'absence du " + absence.Datedebut.ToShortDateString() + " au " + absence.Datefin.ToShortDateString() + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.SupprimerAbsence(absence, idpersonnel);
+                    RemplirDGVAbsences(idpersonnel);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
         }
     }
-
 }

@@ -157,15 +157,14 @@ namespace MediaTek86.Controleur
 
 
         /// <summary>
-        /// Demande de modification d'une absence
+        /// Demande de suppression d'une absence
         /// </summary>
         /// <param name="absence"></param>
         /// <param name="idpersonnel"></param>
-        public void ModifierAbsence(Absence absence, int idpersonnel)
+        public void SupprimerAbsence(Absence absence, int idpersonnel)
         {
-           
+            AccesDonnees.SupprimerAbsence(absence, idpersonnel);
         }
-
 
 
     }
