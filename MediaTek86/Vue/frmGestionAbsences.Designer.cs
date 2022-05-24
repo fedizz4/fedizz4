@@ -167,6 +167,7 @@ namespace MediaTek86.Vue
             this.btnAjouterAbs.TabIndex = 29;
             this.btnAjouterAbs.Text = "Ajouter";
             this.btnAjouterAbs.UseVisualStyleBackColor = false;
+            this.btnAjouterAbs.Click += new System.EventHandler(this.btnAjouterAbs_Click);
             // 
             // btnModifierAbs
             // 
@@ -179,6 +180,7 @@ namespace MediaTek86.Vue
             this.btnModifierAbs.TabIndex = 30;
             this.btnModifierAbs.Text = "Modifier";
             this.btnModifierAbs.UseVisualStyleBackColor = false;
+            this.btnModifierAbs.Click += new System.EventHandler(this.btnModifierAbs_Click);
             // 
             // btnSupprimerAbs
             // 

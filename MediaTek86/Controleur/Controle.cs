@@ -143,5 +143,30 @@ namespace MediaTek86.Controleur
             return AccesDonnees.GetLesMotifs();
         }
 
+
+
+        /// <summary>
+        /// Demande d'ajout d'une absence
+        /// </summary>
+        /// <param name="absence"></param>
+        /// <param name="idpersonnel"></param>
+        public void AjouterAbsence(Absence absence,int idpersonnel)
+        {
+            AccesDonnees.AjouterAbsence(absence, idpersonnel);
+        }
+
+
+        /// <summary>
+        /// Demande de modification d'une absence
+        /// </summary>
+        /// <param name="absence"></param>
+        /// <param name="idpersonnel"></param>
+        public void ModifierAbsence(Absence absence, int idpersonnel)
+        {
+           
+        }
+
+
+
     }
 }

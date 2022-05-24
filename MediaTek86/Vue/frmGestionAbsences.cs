@@ -35,6 +35,7 @@ namespace MediaTek86.Vue
         BindingSource bdgAbsences = new BindingSource();
         BindingSource bdgMotifs = new BindingSource();
 
+
         /// <summary>
         /// Initialisation des composants graphiques, ajout des paramètres nom et prenom
         /// Affichage dans les zones de texte de la frmGestionAbsences
@@ -109,6 +110,32 @@ namespace MediaTek86.Vue
         private void btnVider_Click(object sender, EventArgs e)
         {
             Vider();
+        }
+
+        /// <summary>
+        /// Ajouter une absence au personnel sélectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAjouterAbs_Click(object sender, EventArgs e)
+        {
+
+            if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !dtpDebut.Value.Equals("") && !dtpFin.Value.Equals("") && cboMotifs.SelectedIndex != -1)
+            {
+
+                Motif motif = (Motif)bdgMotifs.List[bdgMotifs.Position];
+                Absence absence = new Absence(dtpDebut.Value, dtpFin.Value, idpersonnel, motif.Idmotif, cboMotifs.Text);
+                controle.AjouterAbsence(absence, idpersonnel);
+                RemplirDGVAbsences(idpersonnel);
+            }
+
+        }
+
+        private void btnModifierAbs_Click(object sender, EventArgs e)
+        {
+
+
+
         }
     }
 

@@ -259,6 +259,40 @@ namespace MediaTek86.Dal
             return lesMotifs;
         }
 
+        /// <summary>
+        /// Ajouter une absence
+        /// </summary>
+        /// <param name="absence"></param>
+        /// <param name="idpersonnel"></param> 
+        public static void AjouterAbsence(Absence absence,int idpersonnel)
+        {
+            string req = "INSERT INTO absence(datedebut, datefin, idpersonnel, idmotif) ";
+            req += "SELECT * FROM (SELECT @datedebut AS datedebut, @datefin AS datefin, " + idpersonnel + " AS idpersonnel, @idmotif AS idmotif) AS req ";
+            req += "WHERE NOT EXISTS(SELECT datedebut, idpersonnel FROM absence WHERE datedebut = @datedebut AND idpersonnel = " + idpersonnel + "); ";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@datedebut", absence.Datedebut);
+            parameters.Add("@datefin", absence.Datefin);
+            parameters.Add("@idpersonnel", idpersonnel);
+            parameters.Add("@idmotif", absence.Idmotif);
+            ConnexionBDD connexion = ConnexionBDD.GetInstance(connectionString);
+            connexion.ReqUpdate(req, parameters);
+        }
+
+
+        /// <summary>
+        /// Modification d'une absence
+        /// </summary>
+        /// <param name="absence"></param>
+        /// <param name="idpersonnel"></param>"
+        public static void ModifierAbsence(Absence absence, int idpersonnel)
+        {
+ 
+        }
+
+
+
+
     }
 
 
