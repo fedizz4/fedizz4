@@ -91,6 +91,10 @@ namespace MediaTek86.Vue
         /// <param name="e"></param>
         public void dgvAbsences_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
+            /// <summary>
+            /// Récupération de l'id du personnel sélectionné à l'aide du nom et prénom
+            /// </summary>
+
             DataGridViewRow row = dgvAbsences.CurrentRow;
             dtpDebut.Value = (DateTime)row.Cells["Datedebut"].Value;
             dtpFin.Value = (DateTime)row.Cells["Datefin"].Value;
@@ -152,7 +156,7 @@ namespace MediaTek86.Vue
         private void btnSupprimerAbs_Click(object sender, EventArgs e)
         {
             if (dgvAbsences.SelectedRows.Count > 0)
-            {           
+            {
                 Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
 
                 if (MessageBox.Show("Voulez-vous vraiment supprimer l'absence du " + absence.Datedebut.ToShortDateString() + " au " + absence.Datefin.ToShortDateString() + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -160,6 +164,52 @@ namespace MediaTek86.Vue
                     controle.SupprimerAbsence(absence, idpersonnel);
                     RemplirDGVAbsences(idpersonnel);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            }
+        }
+
+        private void btnModifierAbs_Click(object sender, EventArgs e)
+        {
+            if (dgvAbsences.SelectedRows.Count > 0)
+            {
+                Motif motif = (Motif)bdgMotifs.List[bdgMotifs.Position];
+ 
+                // Récupération des données de l'absence de la ligne à modifier
+                Absence recupererAbsence = new Absence((DateTime)dgvAbsences.CurrentRow.Cells["Datedebut"].Value,
+                                                 (DateTime)dgvAbsences.CurrentRow.Cells["Datefin"].Value,
+                                                 idpersonnel,
+                                                 (int)dgvAbsences.CurrentRow.Cells["Idmotif"].Value,
+                                                 (string)dgvAbsences.CurrentRow.Cells["Motif"].Value);
+
+                // Stockage de la saisie des modifications
+                Absence absenceNEW = new Absence(dtpDebut.Value, dtpFin.Value, idpersonnel, motif.Idmotif, motif.Libelle);
+                if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !dtpDebut.Value.Equals("") && !dtpFin.Value.Equals("") && cboMotifs.SelectedIndex != -1)
+                {
+                    if (MessageBox.Show("Voulez-vous modifier les informations concernant cette absence ?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+
+                        // Supprime l'absence à modifier
+                        // La modification de la date de début (PK) crée un conflit en BDD
+                        controle.SupprimerAbsence(recupererAbsence, idpersonnel);
+
+                        // Ajoute si possible l'absence avec les nouvelles valeurs en remplacement
+                        controle.AjouterAbsence(absenceNEW, idpersonnel);
+                        // Rajoute l'absence initiale (non modifié) si la nouvelle absence n'est pas ajouté en BDD
+                        int nbRecord = dgvAbsences.Rows.Count;
+                        RemplirDGVAbsences(idpersonnel);
+
+                        MessageBox.Show("L'absence a bien été modifiée.", "Information");
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Tous les champs doivent être remplis.", "Alerte");
+                }
+
             }
             else
             {

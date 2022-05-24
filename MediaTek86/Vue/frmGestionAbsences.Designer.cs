@@ -180,6 +180,7 @@ namespace MediaTek86.Vue
             this.btnModifierAbs.TabIndex = 30;
             this.btnModifierAbs.Text = "Modifier";
             this.btnModifierAbs.UseVisualStyleBackColor = false;
+            this.btnModifierAbs.Click += new System.EventHandler(this.btnModifierAbs_Click);
             // 
             // btnSupprimerAbs
             // 
