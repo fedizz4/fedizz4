@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using MediaTek86.Connexion;
-using MySql.Data.MySqlClient;
 using MediaTek86.Modele;
 
 
@@ -23,7 +22,7 @@ namespace MediaTek86.Dal
         /// </summary>
         /// <param name="login"></param>
         /// <param name="pwd"></param>
-        /// <returns></returns>
+        /// <returns>Correspondance des identifiants avec ceux d'un responsable</returns>
         public static Boolean Authentification(string login, string pwd)
         {
             string req = "SELECT * FROM responsable ";
@@ -46,8 +45,6 @@ namespace MediaTek86.Dal
             }
         }
 
-
-
         /// <summary>
         /// Récupère et retourne les personnels provenant de la BDD
         /// </summary>
@@ -55,17 +52,14 @@ namespace MediaTek86.Dal
         public static List<Personnel> GetLesPersonnels()
         {
             List<Personnel> lesPersonnels = new List<Personnel>();
-            ///<summary>
-            ///Requete SQL de selection de la liste des personnels pour chaque colonne, et des noms des services de la table service
-            ///Ajout d'un group by pour éviter doublons et order pour le tri
-            /// </summary>
+
+            //Requete SQL de selection de la liste des personnels pour chaque colonne, et des noms des services de la table service
+            //Ajout d'un group by pour éviter doublons et order pour le tri
             string req = "SELECT p.idpersonnel AS IDPERSONNEL, p.nom AS NOM, p.prenom AS PRENOM, p.tel AS TEL, p.mail AS MAIL, s.idservice AS IDSERVICE, s.nom AS 'SERVICE'";
             req += "FROM personnel p JOIN service s USING(IDSERVICE) GROUP BY p.NOM ORDER BY p.NOM";
 
-            ///<summary>
-            ///Utilisation de la connexion à la BDD pour travailler sur la BDD
-            ///Permet d'exécuter la requête
-            /// </summary>
+            //Utilisation de la connexion à la BDD pour travailler sur la BDD
+            //Permet d'exécuter la requête
             ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
             curseur.ReqSelect(req, null);
             while (curseur.Read())
@@ -89,9 +83,7 @@ namespace MediaTek86.Dal
         /// <returns>Liste des services</returns>
         public static List<Service> GetLesServices()
         {
-            /// <summary>
-            /// Récupération de l'ID et du Nom du service
-            /// </summary>
+            // Récupération de l'ID et du Nom du service
             List<Service> lesServices = new List<Service>();
             string req = "SELECT * FROM service";
             ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
@@ -112,7 +104,6 @@ namespace MediaTek86.Dal
         ///<param name="personnel">Personnel à ajouter</param>"
         public static void AjouterPersonnel(Personnel personnel)
         {
-
             string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice) ";
             req += "SELECT * FROM(SELECT @nom AS nom, @prenom AS prenom, @tel AS tel, @mail AS mail, @idservice AS idservice) AS req ";
             req += "WHERE NOT EXISTS(SELECT nom, prenom FROM personnel WHERE nom = @nom AND prenom = @prenom); ";
@@ -125,7 +116,6 @@ namespace MediaTek86.Dal
             parameters.Add("@idservice", personnel.Idservice);
             ConnexionBDD connexion = ConnexionBDD.GetInstance(connectionString);
             connexion.ReqUpdate(req, parameters);
-
         }
 
         /// <summary>
@@ -145,7 +135,6 @@ namespace MediaTek86.Dal
             string req = "UPDATE personnel SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idservice = @idservice WHERE idpersonnel = @idpersonnel";
             curseur.ReqUpdate(req, parameters);
         }
-
 
         /// <summary>
         /// Suppression d'un personnel
@@ -168,11 +157,10 @@ namespace MediaTek86.Dal
         public static List<Absence> GetLesAbsences(int idpersonnel)
         {
             List<Absence> lesAbsences = new List<Absence>();
-            ///<summary>
-            ///Récupère et retourne les absences du personnel sélectionné
-            /// </summary>      
+
+            //Récupère et retourne les absences du personnel sélectionné   
             string req = "SELECT a.datedebut AS 'datedebut', a.datefin AS 'datefin', a.idpersonnel AS 'idpersonnel', a.idmotif AS 'idmotif', m.libelle AS 'motif' FROM absence a JOIN motif m USING (idmotif)";
-            req += "WHERE idpersonnel=" + idpersonnel + "";
+            req += "WHERE idpersonnel=" + idpersonnel + " ORDER BY dateDebut DESC";
             ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
             curseur.ReqSelect(req, null);
             while (curseur.Read())
@@ -185,20 +173,19 @@ namespace MediaTek86.Dal
                 lesAbsences.Add(absence);
             }
             curseur.Close();
-            return lesAbsences;
-           
+            return lesAbsences;      
         }
+
         /// <summary>
         /// Récupération de l'id du personnel sélectionné
         /// </summary>
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
-        /// <returns></returns>
+        /// <returns>Récupère l'id du personnel sélectionné</returns>
         public static int recupererIdPersonnel(string nom, string prenom)
         {
             // On déclare l'ID à 0 par défaut
             int idpersonnel = 0;
-
             // On sélectionne l'ID de la personne 
             string req = "SELECT idpersonnel FROM personnel WHERE nom='" + nom + "' AND prenom = '" + prenom + "'";
 
@@ -208,18 +195,14 @@ namespace MediaTek86.Dal
             // On loop sur la valeur retournée
             while (curseur.Read())
                 idpersonnel = (int)curseur.Field("IDPERSONNEL");
-
             // On renvoie l'id du personnel (0 par défaut, différent si ligne trouvée)
             return idpersonnel;
         }
-
-
-
-            /// <summary>
-            /// Récupère et retourne les motifs provenant de la BDD
-            /// </summary>
-            /// <returns>liste des services</returns>
-            public static List<Motif> GetLesMotifs()
+        /// <summary>
+        /// Récupère et retourne les motifs provenant de la BDD
+        /// </summary>
+        /// <returns>Liste des motifs</returns>
+        public static List<Motif> GetLesMotifs()
         {
             List<Motif> lesMotifs = new List<Motif>();
             string req = "SELECT * FROM motif ORDER BY libelle;";
@@ -255,7 +238,7 @@ namespace MediaTek86.Dal
         }
 
         /// <summary>
-        /// Suppression d'une absence
+        /// Supprimer une absence
         /// </summary>
         /// <param name="absence"></param>
         /// /// <param name="idpersonnel"></param>
@@ -270,10 +253,5 @@ namespace MediaTek86.Dal
             ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
             conn.ReqUpdate(req, parameters);
         }
-
-       
-
     }
-
-
 }

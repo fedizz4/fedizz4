@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediaTek86.Vue;
-using System.Windows.Forms;
-using MediaTek86.Controleur;
 using MediaTek86.Dal;
-using MySql.Data.MySqlClient;
 using MediaTek86.Modele;
 
 
@@ -22,9 +16,6 @@ namespace MediaTek86.Controleur
         /// Fenêtre d'authentification
         /// </summary>
         private frmAuthentification frmAuthentification;
-
-        frmGestionAbsences abc;
-        frmGestionPersonnel abcd;
 
         /// <summary>
         /// Ouverture de la fenêtre
@@ -41,15 +32,13 @@ namespace MediaTek86.Controleur
         /// </summary>
         /// <param name="login"></param>
         /// <param name="pwd"></param>
-        /// <returns></returns>
+        /// <returns>Vérification de l'authentification</returns>
         public Boolean Authentification(string login, string pwd)
         {
             if (AccesDonnees.Authentification(login, pwd))
             {
-                ///<summary>
-                /// Il faut masquer la fenêtre d'authentification
-                /// Pour afficher ensuite la fenêtre de gestionPersonnel
-                ///</summary>
+                // Il faut masquer la fenêtre d'authentification
+                // Pour afficher ensuite la fenêtre de gestionPersonnel
                 frmAuthentification.Hide();
                 (new frmGestionPersonnel(this)).ShowDialog();
                 return true;
@@ -60,46 +49,43 @@ namespace MediaTek86.Controleur
             }
         }
    
-        ///<summary>
-        ///La fenêtre de gestion des personnels apparait
+        /// <summary>
+        /// La fenêtre de gestion des personnels apparait
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Retourner sur la fenêtre de gestion des personnels</returns>
         public Boolean Retour()
         { 
-            (new frmGestionPersonnel(this)).ShowDialog();
+            new frmGestionPersonnel(this).ShowDialog();
             return true;
         }
-
 
         /// <summary>
         /// La fenêtre de gestion des absences apparait 
         /// </summary>
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
-        /// <returns></returns>
+        /// <returns>Affichage fenêtre de gestion des absences</returns>
         public Boolean Absences(string nom, string prenom)
         {
-            /// <summary>
-            /// Stockage de la frmGestionAbsences dans une variable "abc"
-            /// </summary>
+            // Stockage de la frmGestionAbsences dans une variable "abc"
             frmGestionAbsences abc = new frmGestionAbsences(this, nom, prenom);
             abc.ShowDialog();
             return true;
         }
     
         /// <summary>
-        /// Récupère et retourne les infos des personnels provenant de la BDD
+        /// Récupère et retourne les informations des personnels provenant de la BDD
         /// </summary>
-        /// <returns>liste des personnels</returns>
+        /// <returns>Liste des personnels</returns>
         public List<Personnel> GetLesPersonnels()
         {
             return AccesDonnees.GetLesPersonnels();
         }
 
         /// <summary>
-        /// Récupère et retourne les infos des services provenant de la BDD
+        /// Récupère et retourne les informations des services provenant de la BDD
         /// </summary>
-        /// <returns>liste des services</returns>
+        /// <returns>Liste des services</returns>
         public List<Service> GetLesServices()
         {
             return AccesDonnees.GetLesServices();
@@ -113,7 +99,6 @@ namespace MediaTek86.Controleur
         {
             AccesDonnees.AjouterPersonnel(personnel);
         }
-
 
         /// <summary>
         /// Demande de modification d'un personnel
@@ -134,9 +119,9 @@ namespace MediaTek86.Controleur
         }
 
         /// <summary>
-        /// Récupère et retourne les infos des absences provenant de la BDD
+        /// Récupère et retourne les informations des absences provenant de la BDD
         /// </summary>
-        /// <returns>liste des absences/returns>
+        /// <returns>Liste des absences</returns>
         public List<Absence> GetLesAbsences(int idpersonnel = 0)
         {
             return AccesDonnees.GetLesAbsences(idpersonnel);
@@ -144,15 +129,13 @@ namespace MediaTek86.Controleur
         }
 
         /// <summary>
-        /// Récupère et retourne les infos des motifs provenant de la BDD
+        /// Récupère et retourne les informations des motifs provenant de la BDD
         /// </summary>
-        /// <returns>liste des motifs</returns>
+        /// <returns>Liste des motifs</returns>
         public List<Motif> GetLesMotifs()
         {
             return AccesDonnees.GetLesMotifs();
         }
-
-
 
         /// <summary>
         /// Demande d'ajout d'une absence
@@ -164,7 +147,6 @@ namespace MediaTek86.Controleur
             AccesDonnees.AjouterAbsence(absence, idpersonnel);
         }
 
-
         /// <summary>
         /// Demande de suppression d'une absence
         /// </summary>
@@ -174,7 +156,5 @@ namespace MediaTek86.Controleur
         {
             AccesDonnees.SupprimerAbsence(absence, idpersonnel);
         }
-
-
     }
 }

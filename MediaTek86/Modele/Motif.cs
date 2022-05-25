@@ -5,12 +5,17 @@
     /// Utilisation des fonctions Getter pour l'IdMotif et le libelle
     /// </summary>
     public class Motif
-    {
-
+    { 
         private int idmotif;
         private string libelle;
 
+        /// <summary>
+        /// Création du getter de l'Idmotif des absences
+        /// </summary>
         public int Idmotif { get => idmotif; }
+        /// <summary>
+        /// Création du getter du nom du motif de l'absence
+        /// </summary>
         public string Libelle { get => libelle; }
 
         /// <summary>

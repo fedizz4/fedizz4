@@ -1,31 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MediaTek86.Controleur;
-using MySql.Data.MySqlClient;
-using MediaTek86.Dal;
 using MediaTek86.Modele;
 
 namespace MediaTek86.Vue
 {
     /// <summary>
-    /// /// Fenêtre de gestion du personnel
-    /// /// </summary>
+    /// Fonctionnalités de la fenêtre de gestion du personnel
+    /// </summary>
     public partial class frmGestionPersonnel : Form
     {
-        ///<summary>
-        ///instance du Controleur
+        /// <summary>
+        /// Instance du Controleur
         /// </summary>
         private Controle controle;
 
-        ///<summary>
-        ///Création des objets pour gérer les listes
+        /// <summary>
+        /// Création des objets pour gérer les listes
         /// </summary>
         BindingSource bdgPersonnel = new BindingSource();
         BindingSource bdgService = new BindingSource();
@@ -47,16 +39,15 @@ namespace MediaTek86.Vue
         /// </summary>
         private void Init()
         {
-            AfficherDGVPersonnels();
+            RemplirDGVPersonnels();
             RemplirCboServices();
             Vider();
-
         }
 
         /// <summary>
         /// Affiche la liste des personnels dans la datagrid "Personnel"
         /// </summary>
-        public void AfficherDGVPersonnels()
+        public void RemplirDGVPersonnels()
         {
             List<Personnel> lesPersonnels = controle.GetLesPersonnels();
             bdgPersonnel.DataSource = lesPersonnels;
@@ -71,9 +62,7 @@ namespace MediaTek86.Vue
         /// </summary>
         private void RemplirCboServices()
         {
-            ///<summary>
-            ///Source de données "GetLesServices()"
-            /// </summary>
+            //Source de données "GetLesServices()"
             List<Service> lesServices = controle.GetLesServices();
             bdgService.DataSource = lesServices;
             cboServices.DataSource = bdgService;
@@ -106,17 +95,25 @@ namespace MediaTek86.Vue
                 int idpersonnel = 0;
                 Service service = (Service)bdgService.List[bdgService.Position];
                 Personnel personnel = new Personnel(idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text, txtMail.Text, service.Idservice, service.Nom);
-                controle.AjouterPersonnel(personnel);
-                AfficherDGVPersonnels(); 
-                MessageBox.Show("Le personnel "+personnel.Nom + " " + personnel.Prenom +" a été ajouté avec succès.", "Information");
+            
+                // Confirmation d'ajout du personnel
+                if (MessageBox.Show("Voulez-vous ajouter le personnel " + personnel.Nom + " " + personnel.Prenom + " ?", "Confirmation d'ajout d'un personnel", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.AjouterPersonnel(personnel);
+                    RemplirDGVPersonnels();
+                    MessageBox.Show("Le personnel " + personnel.Nom + " " + personnel.Prenom + " a été ajouté avec succès.", "Information");
+                }
+                else
+                {
+                    return;
+                }             
             }
             else
             {
-                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
-            }
-    
+                MessageBox.Show("Tous les champs doivent être remplis.", "Alerte");
+            }  
         }
-    
+
         /// <summary>
         /// Demande de modification d'un personnel
         /// </summary>
@@ -124,42 +121,57 @@ namespace MediaTek86.Vue
         /// <param name="e"></param>
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            if (dgvPersonnel.SelectedRows.Count > 0)
-             {
+            if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !txtTel.Text.Equals("") && !txtMail.Text.Equals("") && cboServices.SelectedIndex != -1)
+            {
+                if (dgvPersonnel.SelectedRows.Count > 0)
+                {
                     Service service = (Service)bdgService.List[bdgService.Position];
                     Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
                     personnel = new Personnel(personnel.Idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text,
                         txtMail.Text, service.Idservice, service.Nom);
-
-                if (MessageBox.Show("Voulez-vous modifier les informations de "+personnel.Nom+" " + personnel.Prenom + " ?",
-                    "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    controle.ModifierPersonnel(personnel);
-                    AfficherDGVPersonnels();
+                    
+                    // Confirmation de la modification du personnel
+                    if (MessageBox.Show("Voulez-vous modifier les informations de " + personnel.Nom + " " + personnel.Prenom + " ?",
+                        "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        controle.ModifierPersonnel(personnel);
+                        RemplirDGVPersonnels();
+                    }
+                    dgvPersonnel.CurrentCell.Selected = true;
                 }
-                dgvPersonnel.CurrentCell.Selected = true;
+                else
+                {
+                    MessageBox.Show("Une ligne doit être sélectionnée.", "Alerte");
+                }
             }
             else
             {
-                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
-            }      
+                MessageBox.Show("Tous les champs doivent être remplis.", "Alerte");
+            }
         }
-     
+
+        /// <summary>
+        /// Supprime un personnel sélectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
             if (dgvPersonnel.SelectedRows.Count > 0)
             {
                 Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+
+                // Confirmation de suppression du personnel sélectionné
                 if (MessageBox.Show("Voulez-vous supprimer " + personnel.Nom + " " + personnel.Prenom + " ?", 
-                    "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes) ;
+                    "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     controle.SupprimerPersonnel(personnel);
-                    AfficherDGVPersonnels();
+                    RemplirDGVPersonnels();
                 }
             }
             else
             {
-                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Alerte");
             }
         }
 
@@ -175,10 +187,8 @@ namespace MediaTek86.Vue
             controle.Absences(txtNom.Text, txtPrenom.Text);
         }
 
-
-
         /// <summary>
-        /// Vider les zones de saisie
+        /// Vide les zones de saisie
         /// </summary>
         private void Vider()
         {
@@ -195,6 +205,5 @@ namespace MediaTek86.Vue
         {
             Vider();
         }
-
     }
 }

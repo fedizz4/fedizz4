@@ -1,44 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MediaTek86.Controleur;
-using MySql.Data.MySqlClient;
 using MediaTek86.Dal;
 using MediaTek86.Modele;
 
 namespace MediaTek86.Vue
 {
     /// <summary>
-    /// Fenêtre de gestion des absences
+    /// Fonctionnalités de la fenêtre de gestion des absences
     /// </summary>
     public partial class frmGestionAbsences : Form
     {
-        ///<summary>
-        ///instance du Controleur
+        /// <summary>
+        /// Instance du Controleur
         /// </summary>
         private Controle controle;
 
         /// <summary>
         /// Initialisation de la variable idpersonnel
+        /// Utile lors de la récupération de l'id du personnel sélectionné
+        /// Pour la liaison des données d'une Form à une autre Form
         /// </summary>
         int idpersonnel;
 
-        ///<summary>
-        ///Création des objets pour gérer les listes
+        /// <summary>
+        /// Création des objets pour gérer les listes
         /// </summary>
         BindingSource bdgAbsences = new BindingSource();
         BindingSource bdgMotifs = new BindingSource();
 
-
         /// <summary>
         /// Initialisation des composants graphiques, ajout des paramètres nom et prenom
         /// Affichage dans les zones de texte de la frmGestionAbsences
+        /// Liaison des données des txtBox "nom/prenom" de FormPersonnel vers FormAbsences
         /// </summary>
         /// <param name="controle"></param>
         /// <param name="nom"></param>
@@ -48,9 +43,7 @@ namespace MediaTek86.Vue
             InitializeComponent();
             this.controle = controle;
 
-            /// <summary>
-            /// Récupération de l'id du personnel sélectionné à l'aide du nom et prénom
-            /// </summary>
+            // Récupération de l'id du personnel sélectionné à l'aide du nom et prénom
             int idpersonnel = AccesDonnees.recupererIdPersonnel(nom, prenom);
             this.idpersonnel = idpersonnel;
             txtNom.Text = nom;
@@ -60,7 +53,7 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
-        /// Initialisation de la frame : remplissage des listes
+        /// Initialisation de la frame : remplissage des listes d'absences et des motifs
         /// </summary>
         private void Init()
         {
@@ -83,17 +76,14 @@ namespace MediaTek86.Vue
 
         }
 
-
         /// <summary>
-        /// Affiche les informations de l'absence sélectionnée
+        /// Affiche les informations de l'absence sélectionnée dans les zones de saisie
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void dgvAbsences_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            /// <summary>
-            /// Récupération de l'id du personnel sélectionné à l'aide du nom et prénom
-            /// </summary>
+            // Récupération de l'id du personnel sélectionné à l'aide du nom et prénom
             List<Absence> lesAbsences = controle.GetLesAbsences(idpersonnel);
             DataGridViewRow row = dgvAbsences.CurrentRow;
             dtpDebut.Value = (DateTime)row.Cells["Datedebut"].Value;
@@ -102,7 +92,7 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
-        /// Affiche les motifs 
+        /// Affiche les motifs des absences dans la cboMotifs
         /// </summary>
         public void RemplirCboMotifs()
         {
@@ -112,7 +102,7 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
-        /// Vider les zones de saisie
+        /// Vide les zones de saisie
         /// </summary>
         private void Vider()
         {
@@ -125,31 +115,41 @@ namespace MediaTek86.Vue
             txtNom.Focus();
         }
 
+        /// <summary>
+        /// Vide les champs lors du clic_bouton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnVider_Click(object sender, EventArgs e)
         {
             Vider();
         }
 
         /// <summary>
-        /// Ajouter une absence au personnel sélectionné
+        /// Ajoute une absence au personnel sélectionné
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAjouterAbs_Click(object sender, EventArgs e)
         {
-
             if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !dtpDebut.Value.Equals("") && !dtpFin.Value.Equals("") && cboMotifs.SelectedIndex != -1)
             {
-
                 Motif motif = (Motif)bdgMotifs.List[bdgMotifs.Position];
                 Absence absence = new Absence(dtpDebut.Value, dtpFin.Value, idpersonnel, motif.Idmotif, cboMotifs.Text);
-                controle.AjouterAbsence(absence, idpersonnel);
-                RemplirDGVAbsences(idpersonnel);
+                if (MessageBox.Show("Voulez-vous ajouter l'absence du " + dtpDebut.Value+ " au " + dtpFin.Value + " ?", "Confirmation d'ajout de l'absence.", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    controle.AjouterAbsence(absence, idpersonnel);
+                    RemplirDGVAbsences(idpersonnel);
+                }
             }
-
+            else
+            {
+                MessageBox.Show("Tous les champs doivent être remplis.", "Alerte");
+            }
         }
+
         /// <summary>
-        /// Supprimer l'absence du personnel sélectionné
+        /// Supprime l'absence du personnel sélectionné
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -158,7 +158,9 @@ namespace MediaTek86.Vue
             if (dgvAbsences.SelectedRows.Count > 0)
             {
                 Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
-
+                /// <summary>
+                /// Confirmation de suppression de l'absence du personnel 
+                /// </summary>
                 if (MessageBox.Show("Voulez-vous vraiment supprimer l'absence du " + absence.Datedebut.ToShortDateString() + " au " + absence.Datefin.ToShortDateString() + " ?", "Confirmation de suppression", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     controle.SupprimerAbsence(absence, idpersonnel);
@@ -166,57 +168,65 @@ namespace MediaTek86.Vue
                 }
             }
             else
-            {
-                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+            {   
+                // Selection obligatoire d'une ligne de la datagrid
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Alerte");
             }
         }
 
+        /// <summary>
+        /// Modifie une absence sélectionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModifierAbs_Click(object sender, EventArgs e)
         {
             if (dgvAbsences.SelectedRows.Count > 0)
             {
                 Motif motif = (Motif)bdgMotifs.List[bdgMotifs.Position];
- 
-                // Récupération des données de l'absence de la ligne à modifier
-                Absence recupererAbsence = new Absence((DateTime)dgvAbsences.CurrentRow.Cells["Datedebut"].Value,
+                // Récupération des données de l'absence sélectionnée
+                // On doit stocker les données dans une variable "absInitiale"
+                Absence absInitiale = new Absence((DateTime)dgvAbsences.CurrentRow.Cells["Datedebut"].Value,
                                                  (DateTime)dgvAbsences.CurrentRow.Cells["Datefin"].Value,
                                                  idpersonnel,
                                                  (int)dgvAbsences.CurrentRow.Cells["Idmotif"].Value,
                                                  (string)dgvAbsences.CurrentRow.Cells["Motif"].Value);
-
-                // Stockage de la saisie des modifications
-                Absence absModifie= new Absence(dtpDebut.Value, dtpFin.Value, idpersonnel, motif.Idmotif, motif.Libelle);
+                // Stockage de la saisie des modifications demandées dans une variable "absUpdate"
+                Absence absUpdate= new Absence(dtpDebut.Value, dtpFin.Value, idpersonnel, motif.Idmotif, motif.Libelle);
 
                 if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !dtpDebut.Value.Equals("") && !dtpFin.Value.Equals("") && cboMotifs.SelectedIndex != -1)
                 {
+                    // Date de début de l'absence doit être inférieure à la date de fin de l'absence
+                    // Sinon on repart dans la zone de saisie des absences
+                    if (dtpFin.Value < dtpDebut.Value)
+                    {
+                        MessageBox.Show("La date de fin de l'absence ne peut pas être inférieure à la date de début de l'absence.", "Alerte");
+                        return;
+                    }
+                    // Confirmation des modifications de l'absence sélectionnée
                     if (MessageBox.Show("Voulez-vous modifier les informations concernant cette absence ?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-
-                        // Supprime l'absence à modifier
-                        // La modification de la date de début (PK) crée un conflit en BDD
-                        controle.SupprimerAbsence(recupererAbsence, idpersonnel);
-
-                        // Ajoute si possible l'absence avec les nouvelles valeurs en remplacement
-                        controle.AjouterAbsence(absModifie, idpersonnel);
-                        // Rajoute l'absence initiale (non modifié) si la nouvelle absence n'est pas ajouté en BDD
-                        int nbRecord = dgvAbsences.Rows.Count;
+                        // Supprimer l'absence initiale une fois qu'elle a été modifiée, sinon elle apparaît toujours dans la base
+                        controle.SupprimerAbsence(absInitiale, idpersonnel);
+                        // Ajout de l'absence modifiée
+                        controle.AjouterAbsence(absUpdate, idpersonnel);
+                        // Si on n'ajoute pas l'absence modifiée, on remet l'absence initiale 
+                        int retourAbsInitiale = dgvAbsences.Rows.Count;
                         RemplirDGVAbsences(idpersonnel);
-
                         MessageBox.Show("L'absence a bien été modifiée.", "Information");
-
                     }
                 }
                 else
                 {
                     MessageBox.Show("Tous les champs doivent être remplis.", "Alerte");
                 }
-
             }
             else
             {
-                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+                MessageBox.Show("Une ligne doit être sélectionnée.", "Alerte");
             }
         }
+
         /// <summary>
         /// Masque la fenêtre de gestion des absences
         /// Affichage de la fenêtre de gestion du personnel

@@ -9,7 +9,13 @@
         private int IDSERVICE;
         private string NOM;
 
+        /// <summary>
+        /// Création du getter de l'Idservice
+        /// </summary>
         public int Idservice { get => IDSERVICE; }
+        /// <summary>
+        /// Création du getter du nom du service
+        /// </summary>
         public string Nom { get => NOM; }
 
         /// <summary>
@@ -31,6 +37,5 @@
         {
             return this.NOM;
         }
-
     }
 }
