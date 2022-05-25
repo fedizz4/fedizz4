@@ -351,6 +351,8 @@ namespace MediaTek86.Vue
             this.Controls.Add(this.lblListePersonnel);
             this.Controls.Add(this.lblGestion);
             this.Controls.Add(this.dgvPersonnel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmGestionPersonnel";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

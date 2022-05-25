@@ -349,6 +349,8 @@ namespace MediaTek86.Vue
             this.Controls.Add(this.lblGestionAbsences);
             this.Controls.Add(this.lblListeAbsences);
             this.Controls.Add(this.lblAbsences);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmGestionAbsences";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

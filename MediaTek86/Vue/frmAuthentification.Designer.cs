@@ -129,6 +129,8 @@ namespace MediaTek86.Vue
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtIdentifiant);
             this.Controls.Add(this.lblIdentifiant);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAuthentification";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
