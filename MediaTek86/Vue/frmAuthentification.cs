@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MediaTek86.Controleur;
-using MediaTek86.Vue;
-using MediaTek86.Dal;
-using MySql.Data.MySqlClient;
 
 namespace MediaTek86.Vue
 {
@@ -36,7 +26,6 @@ namespace MediaTek86.Vue
             txtPassword.UseSystemPasswordChar = true;
         }
 
-
         /// <summary>
         /// Procédure évènementielle du bouton Connexion
         /// On vérifie que les identifiants sont corrects pour pouvoir accéder à la BDD
@@ -60,9 +49,8 @@ namespace MediaTek86.Vue
                 }
                 else
                 {
-                    MessageBox.Show("Tous les champs doivent être remplis.", "Information");
-                }
-            
+                    MessageBox.Show("Tous les champs doivent être remplis.", "Alerte");
+                }         
         }
 
         /// <summary>

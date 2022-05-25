@@ -106,8 +106,6 @@ namespace MediaTek86.Vue
         /// </summary>
         private void Vider()
         {
-            txtNom.Text = "";
-            txtPrenom.Text = "";
             dtpDebut.Text = "";
             dtpFin.Text = "";
             cboMotifs.SelectedIndex = -1;
