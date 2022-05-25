@@ -94,7 +94,7 @@ namespace MediaTek86.Vue
             /// <summary>
             /// Récupération de l'id du personnel sélectionné à l'aide du nom et prénom
             /// </summary>
-
+            List<Absence> lesAbsences = controle.GetLesAbsences(idpersonnel);
             DataGridViewRow row = dgvAbsences.CurrentRow;
             dtpDebut.Value = (DateTime)row.Cells["Datedebut"].Value;
             dtpFin.Value = (DateTime)row.Cells["Datefin"].Value;
@@ -185,7 +185,8 @@ namespace MediaTek86.Vue
                                                  (string)dgvAbsences.CurrentRow.Cells["Motif"].Value);
 
                 // Stockage de la saisie des modifications
-                Absence absenceNEW = new Absence(dtpDebut.Value, dtpFin.Value, idpersonnel, motif.Idmotif, motif.Libelle);
+                Absence absModifie= new Absence(dtpDebut.Value, dtpFin.Value, idpersonnel, motif.Idmotif, motif.Libelle);
+
                 if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !dtpDebut.Value.Equals("") && !dtpFin.Value.Equals("") && cboMotifs.SelectedIndex != -1)
                 {
                     if (MessageBox.Show("Voulez-vous modifier les informations concernant cette absence ?", "Confirmation de modification", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -196,7 +197,7 @@ namespace MediaTek86.Vue
                         controle.SupprimerAbsence(recupererAbsence, idpersonnel);
 
                         // Ajoute si possible l'absence avec les nouvelles valeurs en remplacement
-                        controle.AjouterAbsence(absenceNEW, idpersonnel);
+                        controle.AjouterAbsence(absModifie, idpersonnel);
                         // Rajoute l'absence initiale (non modifié) si la nouvelle absence n'est pas ajouté en BDD
                         int nbRecord = dgvAbsences.Rows.Count;
                         RemplirDGVAbsences(idpersonnel);
@@ -215,6 +216,17 @@ namespace MediaTek86.Vue
             {
                 MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
             }
+        }
+        /// <summary>
+        /// Masque la fenêtre de gestion des absences
+        /// Affichage de la fenêtre de gestion du personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            (this).Hide();
+            controle.Retour();
         }
     }
 }

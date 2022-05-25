@@ -108,7 +108,7 @@ namespace MediaTek86.Vue
                 Personnel personnel = new Personnel(idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text, txtMail.Text, service.Idservice, service.Nom);
                 controle.AjouterPersonnel(personnel);
                 AfficherDGVPersonnels(); 
-                MessageBox.Show("Le personnel "+personnel.Nom + " " + personnel.Prenom +"a été ajouté avec succès.", "Information");
+                MessageBox.Show("Le personnel "+personnel.Nom + " " + personnel.Prenom +" a été ajouté avec succès.", "Information");
             }
             else
             {
@@ -164,12 +164,14 @@ namespace MediaTek86.Vue
         }
 
         /// <summary>
+        /// Masque la fenêtre de gestion du personnel
         /// Affichage de la fenêtre de gestion des absences
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAbsences_Click(object sender, System.EventArgs e)
         {
+            this.Hide();
             controle.Absences(txtNom.Text, txtPrenom.Text);
         }
 

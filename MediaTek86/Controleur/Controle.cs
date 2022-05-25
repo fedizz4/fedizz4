@@ -33,7 +33,6 @@ namespace MediaTek86.Controleur
         {
             frmAuthentification = new frmAuthentification(this);
             frmAuthentification.ShowDialog();
-
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace MediaTek86.Controleur
             {
                 ///<summary>
                 /// Il faut masquer la fenêtre d'authentification
-                ///Pour afficher ensuite la fenêtre de gestionPersonnel
+                /// Pour afficher ensuite la fenêtre de gestionPersonnel
                 ///</summary>
                 frmAuthentification.Hide();
                 (new frmGestionPersonnel(this)).ShowDialog();
@@ -61,6 +60,16 @@ namespace MediaTek86.Controleur
             }
         }
    
+        ///<summary>
+        ///La fenêtre de gestion des personnels apparait
+        /// </summary>
+        /// <returns></returns>
+        public Boolean Retour()
+        { 
+            (new frmGestionPersonnel(this)).ShowDialog();
+            return true;
+        }
+
 
         /// <summary>
         /// La fenêtre de gestion des absences apparait 

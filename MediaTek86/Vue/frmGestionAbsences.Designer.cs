@@ -206,6 +206,7 @@ namespace MediaTek86.Vue
             this.btnRetour.TabIndex = 32;
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = false;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
             // dgvAbsences
             // 

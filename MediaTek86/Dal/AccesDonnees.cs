@@ -47,33 +47,6 @@ namespace MediaTek86.Dal
         }
 
 
-        /// <summary>
-        /// Fenêtre des absences
-        /// </summary>
-        /// <param name="nom"></param>
-        /// <param name="prenom"></param>
-        /// <returns></returns>
-        public static Boolean Absences(string nom, string prenom)
-        {
-            string req = "SELECT * FROM personnel ";
-            req += "WHERE nom = @nom AND prenom = @prenom";
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("@prenom", prenom);
-            parameters.Add("@nom", nom);
-            ConnexionBDD curseur = ConnexionBDD.GetInstance(connectionString);
-            curseur.ReqSelect(req, parameters);
-
-            if (curseur.Read())
-            {
-                curseur.Close();
-                return true;
-            }
-            else
-            {
-                curseur.Close();
-                return false;
-            }
-        }
 
         /// <summary>
         /// Récupère et retourne les personnels provenant de la BDD
@@ -240,11 +213,13 @@ namespace MediaTek86.Dal
             return idpersonnel;
         }
 
-        /// <summary>
-        /// Récupère et retourne les motifs provenant de la BDD
-        /// </summary>
-        /// <returns>liste des services</returns>
-        public static List<Motif> GetLesMotifs()
+
+
+            /// <summary>
+            /// Récupère et retourne les motifs provenant de la BDD
+            /// </summary>
+            /// <returns>liste des services</returns>
+            public static List<Motif> GetLesMotifs()
         {
             List<Motif> lesMotifs = new List<Motif>();
             string req = "SELECT * FROM motif ORDER BY libelle;";
@@ -296,7 +271,7 @@ namespace MediaTek86.Dal
             conn.ReqUpdate(req, parameters);
         }
 
-
+       
 
     }
 
