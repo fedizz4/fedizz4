@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+
 namespace MediaTek86.Connexion
 {
-        /// <summary>
-        /// Connexion à la base de données et exécution des requêtes
-        /// </summary>
-        public class ConnexionBDD
+    /// <summary>
+    /// Connexion à la base de données et exécution des requêtes
+    /// </summary>
+    public class ConnexionBDD
         {
             /// <summary>
             /// Unique instance de la classe
