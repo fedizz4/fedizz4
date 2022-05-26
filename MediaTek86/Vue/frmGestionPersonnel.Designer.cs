@@ -83,7 +83,7 @@ namespace MediaTek86.Vue
             this.dgvPersonnel.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPersonnel.EnableHeadersVisualStyles = false;
             this.dgvPersonnel.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
-            this.dgvPersonnel.Location = new System.Drawing.Point(23, 114);
+            this.dgvPersonnel.Location = new System.Drawing.Point(19, 88);
             this.dgvPersonnel.Name = "dgvPersonnel";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.LemonChiffon;
@@ -98,7 +98,7 @@ namespace MediaTek86.Vue
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
             this.dgvPersonnel.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvPersonnel.Size = new System.Drawing.Size(612, 254);
+            this.dgvPersonnel.Size = new System.Drawing.Size(622, 284);
             this.dgvPersonnel.TabIndex = 60;
             this.dgvPersonnel.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonnels_CellEnter);
             // 
@@ -120,7 +120,7 @@ namespace MediaTek86.Vue
             this.lblListePersonnel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
             this.lblListePersonnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListePersonnel.ForeColor = System.Drawing.Color.White;
-            this.lblListePersonnel.Location = new System.Drawing.Point(178, 93);
+            this.lblListePersonnel.Location = new System.Drawing.Point(181, 65);
             this.lblListePersonnel.Name = "lblListePersonnel";
             this.lblListePersonnel.Size = new System.Drawing.Size(303, 23);
             this.lblListePersonnel.TabIndex = 2;

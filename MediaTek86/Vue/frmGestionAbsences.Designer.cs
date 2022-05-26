@@ -76,7 +76,7 @@ namespace MediaTek86.Vue
             this.lblListeAbsences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
             this.lblListeAbsences.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListeAbsences.ForeColor = System.Drawing.Color.White;
-            this.lblListeAbsences.Location = new System.Drawing.Point(178, 93);
+            this.lblListeAbsences.Location = new System.Drawing.Point(178, 72);
             this.lblListeAbsences.Name = "lblListeAbsences";
             this.lblListeAbsences.Size = new System.Drawing.Size(303, 23);
             this.lblListeAbsences.TabIndex = 21;
@@ -232,7 +232,7 @@ namespace MediaTek86.Vue
             this.dgvAbsences.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAbsences.EnableHeadersVisualStyles = false;
             this.dgvAbsences.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
-            this.dgvAbsences.Location = new System.Drawing.Point(23, 114);
+            this.dgvAbsences.Location = new System.Drawing.Point(161, 95);
             this.dgvAbsences.Name = "dgvAbsences";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.LemonChiffon;
@@ -246,7 +246,7 @@ namespace MediaTek86.Vue
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dgvAbsences.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvAbsences.Size = new System.Drawing.Size(612, 254);
+            this.dgvAbsences.Size = new System.Drawing.Size(334, 284);
             this.dgvAbsences.TabIndex = 60;
             this.dgvAbsences.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAbsences_CellEnter);
             // 
