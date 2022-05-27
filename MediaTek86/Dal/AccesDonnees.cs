@@ -14,7 +14,7 @@ namespace MediaTek86.Dal
         /// <summary>
         /// Chaine de connexion à la BDD MediaTek86
         /// </summary>
-        private static string connectionString = "server=changeme;database=changeme;uid=changeme;pwd=changeme;";
+        private static string connectionString = "server=localhost;database=mediatek86;uid=root;pwd=@Azerty85!;";
 
         /// <summary>
         /// Fenêtre d'authentification 
