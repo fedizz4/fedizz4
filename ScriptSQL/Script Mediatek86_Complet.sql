@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 27 mai 2022 à 13:08
+-- Généré le : ven. 27 mai 2022 à 16:12
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -155,7 +155,8 @@ INSERT INTO `personnel` (`IDPERSONNEL`, `IDSERVICE`, `NOM`, `PRENOM`, `TEL`, `MA
 (10, 2, 'Hilda', 'Lowe', '419322810', 'viverra@hotmail.net'),
 (11, 1, 'Carissa', 'Roach', '212932672', 'vulputate@icloud.org'),
 (15, 1, 'Steve', 'McGrt', '123456789', 'steve.mcgrt1458m@icloud.org'),
-(19, 2, 'Bob', 'Azart', '123457898', 'erggz@icloud.org');
+(19, 2, 'Bob', 'Azart', '123457898', 'erggz@icloud.org'),
+(28, 3, 'Charlotte', 'Ofraise', '456782369', 'charlotte.fraise.chtOfra123@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,7 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT pour la table `personnel`
 --
 ALTER TABLE `personnel`
-  MODIFY `IDPERSONNEL` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `IDPERSONNEL` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
