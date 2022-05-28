@@ -11,7 +11,6 @@ namespace MediaTek86.Vue
     {
         /// <summary>
         /// Récupération du controleur
-        /// tst
         /// </summary>
         private Controle controle;
 
