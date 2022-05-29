@@ -12,7 +12,7 @@ namespace MediaTek86.Dal
     public class AccesDonnees
     {
         /// <summary>
-        /// Chaine de connexion à la BDD MediaTek86
+        /// Chaine de connexion à la BDD MediaTek86 (localhost)
         /// </summary>
         private static string connectionString = "server=localhost;database=mediatek86;uid=root;pwd=@Azerty85!;";
 
