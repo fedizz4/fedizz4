@@ -8,7 +8,7 @@ Si vous souhaitez télécharger l'application en version localhost (vous n'aurez
 
 Si vous souhaitez télécharger l'application en version serveur (vous aurez accès à la base de données et donc aux fenêtres de gestion) :
  
-	.Il vous faudra pour cela extraire les fichiers du dossier "Téléchargement - MediaTek86 Localhost"
+	.Il vous faudra pour cela extraire les fichiers du dossier "Téléchargement - MediaTek86 Serveur"
 	.Puis vous devrez cliquer sur "setup.exe", et cliquer sur les "ok" des fenêtres qui s'afficheront
 	.Enfin vous pourrez lancer l'application à partir de l'application manifeste.
 
