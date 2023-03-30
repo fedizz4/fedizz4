@@ -14,5 +14,4 @@ Si vous souhaitez télécharger l'application en version serveur (vous aurez acc
 
 Si vous souhaitez vous connecter sur la fenêtre d'authentification :
 
-	.Il vous faudra saisir l'identifiant : Samzei
-	.Il vous faudra saisir le mot de passe : @Azerty85!
+	
